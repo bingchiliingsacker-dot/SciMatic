@@ -16,3 +16,6 @@ authors = [
 
 [project.urls]
 Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
+
+[tool.setuptools.packages.find]
+where = ['src']
