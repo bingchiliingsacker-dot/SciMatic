@@ -8,7 +8,7 @@ version = '1.1.0'
 description = 'A Python library for mathematics, science calculations, and experimental mathematical functions.'
 readme = 'README.md'
 requires-python = '>=3.9'
-license = {file = 'LICENSE'}
+license = 'MIT'
 
 authors = [
     {name = 'TheCursedOne'}
@@ -18,4 +18,5 @@ authors = [
 Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 
 [tool.setuptools.packages.find]
-where = ["src"]  # Adjust this to match your actual package location
+where = ['.'] 
+include = ['scimatic*']
