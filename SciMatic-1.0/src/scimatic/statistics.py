@@ -55,7 +55,7 @@ def quartile(
 	return formula
 	
 def decile(
-	raw_data: int,
+	raw_data: list[int],
 	k: int,
 	print_result: bool = False
 ) -> int | None:
@@ -109,7 +109,7 @@ def decile(
 	return formula
 	
 def percentile(
-	raw_data: int,
+	raw_data: list[int],
 	k: int,
 	print_result: bool = False
 ) -> int | None:
