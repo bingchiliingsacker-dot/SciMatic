@@ -3,12 +3,12 @@ from .errors import NegativeDiscriminantError, ComparisonError, VariableError
 from .convenient_utils import Operator
 
 def quadratic_equation(
-	a: int,
-	b: int,
-	c: int,
-	x: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
+	x: int | float,
 	print_result: bool = False
-) -> int | None:
+) -> int | float | None:
 	
 	result = a * x**2 + b * x + c
 	
@@ -18,12 +18,12 @@ def quadratic_equation(
 		
 
 def quadratic_formula(
-	a: int,
-	b: int,
-	c: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
 	print_result: bool = False,
 	vietas_formula: bool = False
-) -> int | None:
+) -> int | float | None:
 	
 	discriminant = b**2 - 4 * a * c
 	
@@ -47,12 +47,12 @@ def quadratic_formula(
 	return x1, x2
 	
 def quadratic_inequality(
-	a: int,
-	b: int,
-	c: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
 	symbol: Operator,
 	print_result: bool = False
-) -> int | None:
+) -> int | float | None:
 	symbol_list = ['>', '<', '>=', '<=']
 	
 	if symbol not in symbol_list:
