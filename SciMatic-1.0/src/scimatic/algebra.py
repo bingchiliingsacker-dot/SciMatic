@@ -1,5 +1,6 @@
 import math
 from .errors import NegativeDiscriminantError, ComparisonError, VariableError
+from .convenient_utils import Operator
 
 def quadratic_equation(
 	a: int,
