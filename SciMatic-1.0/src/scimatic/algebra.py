@@ -3,10 +3,10 @@ from .errors import NegativeDiscriminantError, ComparisonError, VariableError
 from .convenient_utils import Operator
 
 def quadratic_equation(
-	a: int,
-	b: int,
-	c: int,
-	x: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
+	x: int | float,
 	print_result: bool = False
 ) -> int | None:
 	
@@ -18,9 +18,9 @@ def quadratic_equation(
 		
 
 def quadratic_formula(
-	a: int,
-	b: int,
-	c: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
 	print_result: bool = False,
 	vietas_formula: bool = False
 ) -> int | None:
@@ -47,9 +47,9 @@ def quadratic_formula(
 	return x1, x2
 	
 def quadratic_inequality(
-	a: int,
-	b: int,
-	c: int,
+	a: int | float,
+	b: int | float,
+	c: int | float,
 	symbol: Operator,
 	print_result: bool = False
 ) -> int | None:
