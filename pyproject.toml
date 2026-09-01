@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'SciMatic'
-version = '1.0.2'
+version = '1.1.0'
 description = 'A Python library for mathematics, science calculations, and experimental mathematical functions.'
 readme = 'README.md'
 requires-python = '>=3.9'
