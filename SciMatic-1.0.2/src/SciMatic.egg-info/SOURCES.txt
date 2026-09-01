@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+src/SciMatic.egg-info/PKG-INFO
+src/SciMatic.egg-info/SOURCES.txt
+src/SciMatic.egg-info/dependency_links.txt
+src/SciMatic.egg-info/top_level.txt
+src/scimatic/__init__.py
+src/scimatic/algebra.py
+src/scimatic/convenient_utils.py
+src/scimatic/errors.py
+src/scimatic/geometry.py
+src/scimatic/niche.py
+src/scimatic/statistics.py
+src/scimatic/scientific/mechanics.py
