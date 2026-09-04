@@ -149,7 +149,7 @@ def pythagorean_theorem(
 	if c is not None:
 		c_square = a**2 + b**2
 		
-		if math.isclose(c**2, a**2, b**2, rel_tol=1e-9, abs_tol=1e-9):
+		if math.isclose(c**2, a**2 + b**2, rel_tol=1e-9, abs_tol=1e-9):
 			output = True
 		else:
 			output = False
