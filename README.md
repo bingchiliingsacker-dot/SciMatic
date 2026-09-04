@@ -1,61 +1,305 @@
 # SciMatic
 
-**SciMatic** is a **lightweight** and **readable**, python-only library that focuses on mathematics and scientific concepts such as **algebra, momentum and impulse, statistics, and many more** will be added.
+A Python library for mathematics, statistics, science, and scientific computing.
+
+SciMatic is a lightweight, student-friendly Python library designed to make mathematical and scientific calculations easier to perform programmatically.
+
+«From basic mathematics to advanced scientific concepts — all in Python.»
+
+---
 
 # Features
 
-## Algebra.py
-•Quadratic Equations/Inequalities
+SciMatic is built around modular mathematical tools.
 
-•Pythagorean Theorem
+# Mathematics
 
-## convenient_utils.py
-•General-use parser(can be used for non-math related activities)
+- Quadratic equations
+- Quadratic inequalities
+- Factorials
+- Mathematical operators
+- PEMDAS/BODMAS expression evaluation
+- Custom mathematical functions
 
-•Operator - A type annotation.
+ # Statistics
 
-## errors.py
-•CaseError - For if someone tried a case that is out of the list of cases.
+- Median
+- Quartiles
+- Deciles
+- Percentiles
+- Interpolation
 
-•TrigonometryError - If no real triangle is formed, raise this.
+# Trigonometry
 
-•NegativeDiscriminantError - Raises if a quadratic formulas discriminant is less than 0.
+- Law of Sines
+- Law of Cosines
+- Trigonometric calculations
+- Triangle-related mathematics
 
-•VariableError - If a > 0, raise this.
+# Parser
 
-•ComparisonError - If the value is not a comparison, this error is raised.
+SciMatic includes a general-purpose parser for processing mathematical expressions and tokens.
 
-•ConstantError - If the statistics k is not in the range of possible k.
+The parser can split input into:
 
-•DataError - If a data array is too short for process, raise this.
+- Characters
+- Words
+- Tokens
 
-•ModeError - For the parser. Raises if the chosen mode is not in the modes array.
+It can also convert recognized tokens into numerical values such as integers and floats.
 
-## statistics.py
-•Quartiles
+# Scientific Computing
 
-•Deciles
+SciMatic is designed to eventually expand beyond pure mathematics into scientific computing, including modules for:
 
-•Percentiles
+- Physics
+- Thermodynamics
+- Calculus
+- Engineering mathematics
+- Advanced scientific calculations
 
-•Median
+---
 
-## Geometry.py
-•The Law of Sine
+# Installation
 
-•The Law of Cosine
+Install SciMatic using pip:
+```
+pip install scimatic
+```
+Then import it in Python:
+```
+import scimatic
+```
+---
 
-## niche.py
-•Fibonacci sequence
+# Quick Start
 
-•Collatz Conjecture
+Basic calculations
+```
+import scimatic
 
-•Ackermann Function
+print(scimatic.factorial(5))
+```
+Output:
+```
+120
+```
+---
 
-# Scientific
-- A branch of SciMatic that does scientific calculations
+# Expression Parsing
 
-## mechanics.py
-•momentum - calculates momentum
+SciMatic can be used to process mathematical expressions while respecting operator precedence.
 
-•Impulse - calculates impulse
+For example:
+```
+equation = '2 + 3 * 4'
+```
+SciMatic evaluates multiplication before addition:
+```
+2 + (3 * 4)
+```
+Result:
+```
+14
+```
+SciMatic's expression system supports operators such as:
+```
++
+-
+*
+/
+//
+%
+**
+```
+and parentheses.
+
+---
+
+# Quadratics
+
+SciMatic provides tools for solving quadratic equations.
+
+For an equation such as:
+```
+x² + 5x + 6 = 0
+```
+SciMatic can determine its roots:
+```
+x = -2
+x = -3
+```
+The quadratic module is designed to provide a convenient programmatic interface for algebraic calculations.
+
+---
+
+# Statistics
+
+SciMatic provides common statistical operations.
+
+Example:
+```
+data = [10, 20, 20, 30, 40]
+```
+You can calculate values such as:
+```
+Mean
+Median
+Mode
+Quartiles
+Percentiles
+```
+SciMatic also supports interpolation-based statistical calculations.
+
+---
+
+# Modular Architecture
+
+SciMatic is designed as a modular library.
+
+A simplified structure looks like:
+```
+SciMatic/
+│
+├── general.py
+├── error.py
+├── quadratics.py
+├── statistics.py
+├── trigonometry.py
+│
+└── scientific/
+    ├── physics.py
+    └── rocket_science.py(my proposed idea)
+```
+
+This allows different areas of mathematics and science to remain separated while still being part of the same library.
+
+---
+
+£ Error Handling
+
+SciMatic provides specialized exceptions for mathematical errors.
+
+Examples include:
+```
+DataError
+NegativeDiscriminantError
+VariableError
+```
+These errors are intended to make invalid mathematical input easier to identify and handle.
+
+---
+
+# Philosophy
+
+SciMatic is designed around three principles:
+
+Simple
+
+Mathematical operations should be easy to understand and use.
+
+Modular
+
+Different mathematical disciplines should be separated into dedicated modules.
+
+Extensible
+
+SciMatic should be able to grow from a mathematics library into a broader scientific-computing ecosystem.
+
+---
+
+# Development
+
+SciMatic is currently under active development.
+
+The project is intended to expand into areas such as:
+
+- Advanced calculus
+- Thermodynamics
+- Physics
+- Scientific simulations
+- More advanced statistics
+- Probability
+- Engineering mathematics
+- Scientific computing
+
+---
+
+# Roadmap
+
+## Mathematics
+
+- [x] Basic mathematical utilities
+- [x] Expression parser
+- [x] Operator handling
+- [x] Quadratic calculations
+- [x] Statistical utilities
+- [x] Trigonometric utilities
+- [ ] More advanced calculus
+- [ ] More advanced algebra
+
+## Statistics
+
+- [ ] Mean
+- [x] Median
+- [ ] Mode
+- [x] Quartiles
+- [x] Percentiles
+- [x] Interpolation
+- [ ] Advanced statistical analysis
+
+## Science
+
+- [ ] Physics module
+- [ ] Thermodynamics
+- [ ] Scientific constants
+- [ ] Engineering calculations
+- [ ] Advanced scientific simulations
+
+## Computer Engineering
+- [ ] Logic Gates
+- [ ] Binary translation
+- [ ] 7-display
+
+## Future
+
+- [ ] Improved documentation
+- [ ] More comprehensive testing
+- [ ] Performance optimization
+- [ ] Expanded API
+- [ ] Educational examples
+- [ ] Possible integration of a ```ans``` history system with sqlite3
+
+---
+
+# Contributing
+
+Contributions, suggestions, and bug reports are welcome.
+
+If you find a bug or have an idea for SciMatic, feel free to open an issue or submit a pull request.
+
+When contributing, please try to keep new functionality modular and well documented.
+
+---
+
+# License
+
+SciMatic is distributed under its project license.
+
+See the "LICENSE" file for the full license terms.
+
+---
+
+# Author
+
+SciMatic is an independently developed Python project focused on making mathematics and scientific computing accessible through code.
+
+---
+
+# Support the Project
+
+If you find SciMatic useful, consider giving the project a ⭐ on GitHub.
+
+Every improvement, experiment, and contribution helps SciMatic grow.
+
+SciMatic — Mathematics, engineered for Python.
