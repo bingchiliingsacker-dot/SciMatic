@@ -232,7 +232,7 @@ def pi(
 	if decimal > 100:
 		raise ValueError('Decimal parameter is higher than 100.')
 	
-	for i in range(int(rounded(decimal))):
+	for i in range(int(round(decimal))):
 		output += processor[i]
 
 	if negative_value:
