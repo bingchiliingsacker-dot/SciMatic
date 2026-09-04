@@ -119,7 +119,6 @@ def cos_law(
 	
 	if case not in cases:
 		raise CaseError(f'Parameter \'case\' must be: {cases}.')
-		
 	known_items = [a, b, c]
 	
 	for var in known_items:
@@ -127,8 +126,15 @@ def cos_law(
 			raise ValueError('Invalid variables.')
 	
 	if case == cases[0]:
-		A = math.degrees(math.acos((b**2 + c**2 - a**2) / (2 * b * c)))
+        if a + b <= c or a + c <= b or b + c <= a:
+            if print_result:
+                print('No such valid triangle...')
+            else:
+                raise TrigonometryError
+            return
+	    A = math.degrees(math.acos((b**2 + c**2 - a**2) / (2 * b * c)))
 		B = math.degrees(math.acos((a**2 + c**2 - b**2) / (2 * a * c)))
+		
 		C = 180 - (A + B)
 		
 		if print_result:
@@ -139,7 +145,9 @@ def cos_law(
 		C = b
 		sidec = math.sqrt(a**2 + c**2 - 2 * a * c * math.cos(math.radians(C)))
 		
-		A = math.degrees(math.acos((c**2 + sidec**2 - a**2) / (2 * c * sidec)))
+		acos_arg = (c**2 + sidec**2 - a**2) / (2 * c * sidec)
+        acos_arg = max(-1.0, min(1.0, acos_arg))
+	    A = math.degrees(math.acos(acos_arg))
 		
 		B = 180 - (A + C)
 		
