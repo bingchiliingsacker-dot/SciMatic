@@ -24,7 +24,7 @@ def quartile(
 		print(position)
 	
 	if position.isinteger():
-		formula = processed_data[int(position) - 1
+		formula = processed_data[int(position) - 1]
 	else:
 		position1 = int(position)
 		position2 = position1 + 1
@@ -65,7 +65,7 @@ def decile(
 		print(position)
 	
 	if position.isinteger():
-		formula = processed_data[int(position) - 1
+		formula = processed_data[int(position) - 1]
 	else:
 		position1 = int(position)
 		position2 = position1 + 1
@@ -116,7 +116,7 @@ def percentile(
 		print(position)
 	
 	if position.isinteger():
-		formula = processed_data[int(position) - 1
+		formula = processed_data[int(position) - 1]
 	else:
 		position1 = int(position)
 		position2 = position1 + 1
