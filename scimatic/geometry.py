@@ -18,7 +18,7 @@ def sin_law(
 	known_items = [a, b, c]
 	
 	for var in known_items:
-		if not isinstance(var, int) or isinstance(var, float):
+		if not isinstance(var, (int, float)):
 			raise ValueError('Invalid variables.')
 	
 	if case == cases[1]:
