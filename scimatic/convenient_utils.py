@@ -215,6 +215,10 @@ def pi(
 	
 	getcontext().prec = 100
 	negative_value = False
+	
+	processor = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
+	output = '3.'
+	true_output = ''
 
 	if decimal is None:
 		output += processor
@@ -224,10 +228,6 @@ def pi(
 		decimal *= decimal
 		decimal /= 2
 		negative_value = True
-	
-	processor = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
-	output = '3.'
-	true_output = ''
 	
 	if decimal > 100:
 		raise ValueError('Decimal parameter is higher than 100.')
