@@ -98,7 +98,9 @@ def calculate(
 	'''
 
 	if len(expression) <= 2:
-		raise ValueError('Parameter expression too short')
+		if print_result:
+			print(expression)
+		return expression
 	
 	processor = []
 	
@@ -213,6 +215,10 @@ def pi(
 	
 	getcontext().prec = 100
 	negative_value = False
+
+	if decimal is None:
+		output += processor
+		return Decimal(output)
 	
 	if decimal < 0:
 		decimal *= decimal
@@ -223,14 +229,10 @@ def pi(
 	output = '3.'
 	true_output = ''
 	
-	if decimal is None:
-		output += processor
-		return Decimal(output)
-	
 	if decimal > 100:
 		raise ValueError('Decimal parameter is higher than 100.')
 	
-	for i in range(decimal):
+	for i in range(int(rounded(decimal))):
 		output += processor[i]
 
 	if negative_value:
