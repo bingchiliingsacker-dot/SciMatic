@@ -16,38 +16,24 @@ def quartile(
 		raise DataError('Raw data is too short.')
 		
 	processed_data = sorted(raw_data)
+	n = len(processed_data)
 	
-	n = 0
-	
-	for data in processed_data:
-		n += 1
-	
-	formula = k * (n + 1) / 4
-	syntax_list = []
-	is_float = False
-	
-	formula = str(formula)
+	position = k * (n + 1) / 4
 	
 	if print_result:
-		print(formula)
+		print(position)
 	
-	for f in formula:
-		if f == '.':
-			is_float = True
-			continue
-			
-		f = int(f)
-		
-		syntax_list.append(f)
-	
-	if is_float:
-		position1 = syntax_list[0]
+	if position.isinteger():
+		formula = processed_data[int(position) - 1
+	else:
+		position1 = int(position)
 		position2 = position1 + 1
-			
+		fraction = position - position1
+
 		lower_value = processed_data[position1 - 1]
 		higher_value = processed_data[position2 - 1]
-			
-		formula = lower_value + float(f'0.{syntax_list[1]}') * (higher_value - lower_value)
+
+		formula = lower_value + fraction * (higher_value - lower_value)
 	
 	if print_result:
 		print(f'Q{k} = {k}({n} + 1) / 4')
@@ -71,37 +57,24 @@ def decile(
 	
 	processed_data = sorted(raw_data)
 	
-	n = 0
+	n = len(processed_data)
 	
-	for data in processed_data:
-		n += 1
-	
-	formula = k * (n + 1) / 10
-	syntax_list = []
-	is_float = False
-	
-	formula = str(formula)
+	position = k * (n + 1) / 10
 	
 	if print_result:
-		print(formula)
+		print(position)
 	
-	for f in formula:
-		if f == '.':
-			is_float = True
-			continue
-			
-		f = int(f)
-		
-		syntax_list.append(f)
-	
-	if is_float:
-		position1 = syntax_list[0]
+	if position.isinteger():
+		formula = processed_data[int(position) - 1
+	else:
+		position1 = int(position)
 		position2 = position1 + 1
-			
+		fraction = position - position1
+
 		lower_value = processed_data[position1 - 1]
 		higher_value = processed_data[position2 - 1]
-			
-		formula = lower_value + float(f'0.{syntax_list[1]}') * (higher_value - lower_value)
+
+		formula = lower_value + fraction * (higher_value - lower_value)
 	
 	if print_result:
 		print(f'D{k} = {k}({n} + 1) / 10')
@@ -135,37 +108,24 @@ def percentile(
 	if print_result:
 		print(processed_data)
 		
-	n = 0
-	
-	for data in processed_data:
-		n += 1
-	
-	formula = k * (n + 1) / 100
-	syntax_list = []
-	is_float = False
-	
-	formula = str(formula)
+	n = len(processed_data)
+
+	position = k * (n + 1) / 100
 	
 	if print_result:
-		print(formula)
+		print(position)
 	
-	for f in formula:
-		if f == '.':
-			is_float = True
-			continue
-			
-		f = int(f)
-		
-		syntax_list.append(f)
-	
-	if is_float:	
-		position1 = syntax_list[0]
+	if position.isinteger():
+		formula = processed_data[int(position) - 1
+	else:
+		position1 = int(position)
 		position2 = position1 + 1
-			
+		fraction = position - position1
+
 		lower_value = processed_data[position1 - 1]
 		higher_value = processed_data[position2 - 1]
-			
-		formula = lower_value + float(f'0.{syntax_list[1]}') * (higher_value - lower_value)
+
+		formula = lower_value + fraction * (higher_value - lower_value)
 		
 	if print_result:
 		print(f'P{k} = {k}({n} + 1) / 100')
@@ -182,10 +142,7 @@ def median(
 	if len(raw_data) <= 1:
 		raise DataError('Raw data is too short.')
 	
-	n = 0
-	
-	for data in processed_data:
-		n += 1
+	n = len(processed_data)
 	
 	position = (n + 1) / 2
 	
