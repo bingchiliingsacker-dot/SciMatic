@@ -96,6 +96,9 @@ def calculate(
 	Note: calculate() was created as a safer
 	alternative to eval()
 	'''
+
+	if len(expression) <= 2:
+		raise ValueError('Parameter expression too short')
 	
 	processor = []
 	
@@ -167,6 +170,11 @@ def factorial(
 	n: int,
 	print_result: bool = True
 ) -> int | None:
+
+	if n < 0:
+		if print_result:
+			print(None)
+		return
 	
 	if n == 0:
 		if print_result:
@@ -200,22 +208,34 @@ def int64_limit(
 		return 2**63 - 1 if not negative_value else -2**63
 
 def pi(
-	decimals: int | None = None
+	decimal: int | None = None
 ) -> Decimal:
 	
 	getcontext().prec = 100
+	negative_value = False
+	
+	if decimal < 0:
+		decimal *= decimal
+		decimal /= 2
+		negative_value = True
 	
 	processor = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
 	output = '3.'
+	true_output = ''
 	
-	if decimals is None:
+	if decimal is None:
 		output += processor
 		return Decimal(output)
 	
-	if decimals > 100:
+	if decimal > 100:
 		raise ValueError('Decimal parameter is higher than 100.')
 	
-	for i in range(decimals):
+	for i in range(decimal):
 		output += processor[i]
+
+	if negative_value:
+		true_output += '-'
+
+	true_output += output
 	
-	return Decimal(output)
+	return Decimal(true_output)
