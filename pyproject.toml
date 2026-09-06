@@ -1,6 +1,6 @@
 [build-system]
-requires = ['setuptools>=61']
-build-backend = 'setuptools.build_meta'
+requires = ['maturin>=1.0,<2.0']
+build-backend = 'maturin'
 
 [project]
 name = 'SciMatic'
@@ -9,7 +9,6 @@ description = 'A Python library for mathematics, science calculations, and exper
 readme = 'README.md'
 requires-python = '>=3.9'
 license = 'MIT'
-
 authors = [
     {name = 'TheCursedOne'}
 ]
@@ -17,6 +16,5 @@ authors = [
 [project.urls]
 Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 
-[tool.setuptools.packages.find]
-where = ['.']
-include = ['scimatic*']
+[tool.maturin]
+python-source = '.'
