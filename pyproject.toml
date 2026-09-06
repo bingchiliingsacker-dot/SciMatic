@@ -18,3 +18,4 @@ Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 
 [tool.maturin]
 python-source = '.'
+module-name = 'flicker_module'
