@@ -14,6 +14,6 @@ mathematics, science calculations,
 anf experimental functions.
 '''
 
-__version__ = '1.3.4'
+__version__ = '1.3.6'
 __author__ = 'Th3Curs3dOn3'
 __license__ = 'MIT'
