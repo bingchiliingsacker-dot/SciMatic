@@ -12,7 +12,7 @@ fn flick(
 
     for b in vectorbools {
         if binary {
-            output.append(if b { 1 } else { 0 })?;
+            output.append(if b { 0 } else { 1 })?;
         } else {
             output.append(!b)?;
         }
