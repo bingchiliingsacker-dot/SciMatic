@@ -6,7 +6,7 @@ build-backend = 'maturin'
 
 [project]
 name = 'SciMatic'
-version = '1.3.1'
+version = '1.3.2'
 description = 'A Python library for mathematics, science calculations, compter engineering concepts, and experimental mathematical functions.'
 readme = 'README.md'
 requires-python = '>=3.9'
@@ -20,7 +20,7 @@ authors = [
 Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 
 [tool.maturin]
-python-source = 'scimatic'
+python-source = '.'
 module-name = 'scimatic.flicker_module'
 bindings = 'pyo3'
 
