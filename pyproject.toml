@@ -1,21 +1,23 @@
 [build-system]
-requires = ['maturin>=1.0,<2.0']
-build-backend = 'maturin'
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
 
 [project]
-name = 'SciMatic'
-version = '1.2.7'
-description = 'A Python library for mathematics, science calculations, and experimental mathematical functions.'
-readme = 'README.md'
-requires-python = '>=3.9'
-license = 'MIT'
+name = "SciMatic"
+version = "1.3.0"
+description = "A Python library for mathematics, science calculations, compter engineering concepts, and experimental mathematical functions."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
 authors = [
-    {name = 'TheCursedOne'}
+    { name = "TheCursedOne" }
 ]
 
 [project.urls]
-Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
+Repository = "https://github.com/bingchiliingsacker-dot/SciMatic"
 
 [tool.maturin]
-python-source = '.'
-module-name = 'flicker_module'
+python-source = "scimatic"
+module-name = "scimatic.flicker_module"
+bindings = "pyo3"
