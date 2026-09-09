@@ -9,14 +9,20 @@ permissions:
 
 jobs:
   release-build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.14"
 
       - name: Install maturin
         run: python -m pip install maturin
@@ -24,10 +30,14 @@ jobs:
       - name: Build release distributions
         run: maturin build --release
 
+      - name: Show built wheels
+        run: |
+          ls -lah target/wheels/
+
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
+          name: release-dists-${{ matrix.os }}
           path: target/wheels/
 
   pypi-publish:
@@ -45,8 +55,9 @@ jobs:
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
+          pattern: release-dists-*
           path: dist/
+          merge-multiple: true
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
