@@ -189,6 +189,10 @@ SciMatic/
     |
     ├── _pycache_/
     |
+    ├── __init__.py
+    |
+    ├── convenient_utils.py
+    |
     ├── c_engineering/
     |   ├── __init__.py
     |   ├── circuits.py
@@ -212,7 +216,7 @@ This allows different areas of mathematics and science to remain separated while
 
 ---
 
-£ Error Handling
+# Error Handling
 
 SciMatic provides specialized exceptions for mathematical errors.
 
