@@ -4,7 +4,7 @@ A Python library for mathematics, statistics, science, and scientific computing.
 
 SciMatic is a lightweight, student-friendly Python library designed to make mathematical and scientific calculations easier to perform programmatically.
 
-«From basic mathematics to advanced scientific concepts — all in Python.»
+«From basic mathematics to advanced scientific concepts — all in Python(Include rust extension).»
 
 ---
 
@@ -57,6 +57,14 @@ SciMatic is designed to eventually expand beyond pure mathematics into scientifi
 - Calculus
 - Engineering mathematics
 - Advanced scientific calculations
+
+# Computer Engineering
+
+SciMatic also offers functions that are in the computer engineering field.
+- Logic Gates
+- 7-Segment Display system
+- Half/Full Adders
+- High-Performance signal flickers
 
 ---
 
@@ -160,16 +168,44 @@ SciMatic is designed as a modular library.
 A simplified structure looks like:
 ```
 SciMatic/
-│
-├── general.py
-├── error.py
-├── quadratics.py
-├── statistics.py
-├── trigonometry.py
-│
-└── scientific/
-    ├── physics.py
-    └── rocket_science.py(my proposed idea)
+├── .github/workflows
+|
+├── .gitigore
+|
+├── Cargo.toml
+|
+├── pyproject.toml
+|
+├── README.md <- you are here
+|
+├── RULES.md
+|
+├──LICENSE
+|
+├── src/
+|   └── lib.rs
+|
+└── scimatic/
+    |
+    ├── _pycache_/
+    |
+    ├── c_engineering/
+    |   ├── __init__.py
+    |   ├── circuits.py
+    |   ├── logic_gates.py
+    |   ├── seg_7display.py
+    |   └── signals.py
+    |
+    ├── mathematic/
+    |   ├── __init__.py
+    |   ├── algebra.py
+    |   ├── errors.py
+    |   ├── geometry.py
+    |   ├── niche.py
+    |   └── statistics.py
+    │
+    └── scientific/
+        └── mechanics.py
 ```
 
 This allows different areas of mathematics and science to remain separated while still being part of the same library.
@@ -257,9 +293,10 @@ The project is intended to expand into areas such as:
 - [ ] Advanced scientific simulations
 
 ## Computer Engineering
-- [ ] Logic Gates
+- [x] Logic Gates
 - [ ] Binary translation
-- [ ] 7-display
+- [x] 7-display
+- [x] Circuitry
 
 ## Future
 
