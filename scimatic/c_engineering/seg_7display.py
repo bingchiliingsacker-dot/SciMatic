@@ -76,5 +76,3 @@ def display_to_7seg(
 		return value
 	
 	return tuple(bool(x) for x in value)
-
-print(display_to_7seg('*'))
