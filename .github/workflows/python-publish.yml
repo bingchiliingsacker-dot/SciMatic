@@ -30,10 +30,6 @@ jobs:
       - name: Build release distributions
         run: maturin build --release
 
-      - name: Show built wheels
-        run: |
-          ls -lah target/wheels/
-
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
