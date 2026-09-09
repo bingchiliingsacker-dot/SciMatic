@@ -1,3 +1,5 @@
+#------------------------------------------pyproject.toml------------------------------------------#
+
 [build-system]
 requires = ['maturin>=1.0,<2.0']
 build-backend = 'maturin'
@@ -21,3 +23,5 @@ Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 python-source = 'scimatic'
 module-name = 'scimatic.flicker_module'
 bindings = 'pyo3'
+
+#------------------------------------------Th3Curs3dOn3------------------------------------------#
