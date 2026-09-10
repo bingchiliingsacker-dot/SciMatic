@@ -37,10 +37,11 @@ async def pulse(
         binary: bool = False,
 ) -> AsyncGenerator[list[bool | int], None]:
 
-    output = vecbools
+    state = vecbools
 
     for i in range(iterations):
-        output = flicker_module.flick(vecbools, binary)
+        state = flicker_module.flick(state, False)
+        output = [int(b) for b in state] if binary else state
         yield output
         if i < iterations - 1:
             await asyncio.sleep(time_interval)
