@@ -393,6 +393,8 @@ print(full_adder(1, 1, 1))
 
 • They can be used to create flickering, delayed, and pulsed binary signals.
 
+• Note: As of 1.40.0, the 3 functions below strictly need a list of booleans, I am working on a fix to this issue as soon as possible.
+
 ```flick(digits, binary=False)```
 ```python
 from scimatic.c_engineering.signals import flick
