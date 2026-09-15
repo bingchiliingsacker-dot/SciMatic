@@ -33,18 +33,16 @@ class Database:
 	# Decorator function
 	def store(self, func: Callable) -> Callable:
 		def wrapper(*args, **kwargs) -> Any:
-			for a in args:
-				self.cursor.execute('INSERT INTO data (date, function_ran, value, version) VALUES (?, ?, ?, ?)',
-				(self.date, func.__name__, str(a), __version__)
-				)
-			for kw, value in kwargs.items():
-				self.cursor.execute('INSERT INTO data (date, function_ran, value, version) VALUES (?, ?, ?, ?)',
-				(self.date, func.__name__, f'keyword argument: {kw}={value}', __version__)
-				)
-			
 			result = func(*args, **kwargs)
+			
+			self.cursor.execute('INSERT INTO data (date, function_ran, value, version) VALUES (?, ?, ?, ?)',
+			(self.date, func.__name__, str(result), __version__)
+			)
+			
 			self.conn.commit()
+			
 			return result
+		
 		return wrapper
 	
 	def get_one(self, id: int | None = None, print_result: bool = False) -> tuple[int, str, str, str, str] | None:
