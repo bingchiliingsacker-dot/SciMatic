@@ -54,7 +54,7 @@ def sin_law(
 		
 		if print_result:
 			print(f'Angle A: {A}, Side C: {sidec}, Side B: {sideb}')
-		return B, sidec, sideb
+		return A, sidec, sideb
 		
 	else:
 		A = c
@@ -155,6 +155,16 @@ def cos_law(
 	else:
 		C = b
 		sidec = math.sqrt(a**2 + c**2 - 2 * a * c * math.cos(math.radians(C)))
+		
+		acos_arg = (c**2 + sidec**2 - a**2) / (2 * c * sidec)
+		acos_arg = max(-1.0, min(1.0, acos_arg))
+		A = math.degrees(math.acos(acos_arg))
+		
+		B = 180 - (A + C)
+		
+		if print_result:
+			print(f'Side c: {sidec}, Angle A: {A}, Angle B: {B}')
+		return sidec, A, B
 		
 		acos_arg = (c**2 + sidec**2 - a**2) / (2 * c * sidec)
 		acos_arg = max(-1.0, min(1.0, acos_arg))
