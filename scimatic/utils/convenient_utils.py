@@ -170,7 +170,7 @@ def calculate(
 #---------------FACTORIAL---------------#
 def factorial(
 	n: int,
-	print_result: bool = True
+	print_result: bool = False
 ) -> int | None:
 
 	if n < 0:
