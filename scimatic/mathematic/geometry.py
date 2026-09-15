@@ -8,7 +8,7 @@ def sin_law(
 	b: int | float,
 	c: int | float,
 	print_result: bool = False
-) -> int | float | list[dict[str, int | float]] | None:
+) -> tuple[float, float, float] | list[dict[str, float]] | None:
 	
 	cases = ['SAA', 'AAS', 'ASA', 'SSA']
 	
@@ -16,6 +16,9 @@ def sin_law(
 		raise CaseError(f'Parameter \'case\' must be: {cases}.')
 		
 	known_items = [a, b, c]
+	
+	if any(var <= 0 for var in known_items):
+		raise ValueError('Triangle values must be positive.')
 	
 	for var in known_items:
 		if not isinstance(var, (int, float)):
@@ -50,7 +53,7 @@ def sin_law(
 		sideb = (b * math.sin(math.radians(B))) / (math.sin(math.radians(A)))
 		
 		if print_result:
-			print(f'Angle B: {B}, Side C: {sidec}, Side B: {sideb}')
+			print(f'Angle A: {A}, Side C: {sidec}, Side B: {sideb}')
 		return B, sidec, sideb
 		
 	else:
@@ -101,10 +104,14 @@ def sin_law(
 				'side b': sideb
 				})
 		
+		outputs = []
+		
+		outputs.extend(output1)
+		outputs.extend(output2)
+		
 		if print_result:
-			print(output1)
-			print(output2)
-		return output1, output2
+			print(outputs)
+		return outputs
 		
 
 def cos_law(
@@ -119,7 +126,11 @@ def cos_law(
 	
 	if case not in cases:
 		raise CaseError(f'Parameter \'case\' must be: {cases}.')
+		
 	known_items = [a, b, c]
+	
+	if any(var <= 0 for var in known_items):
+		raise ValueError('Triangle values must be positive.')
 	
 	for var in known_items:
 		if not isinstance(var, (int, float)):
