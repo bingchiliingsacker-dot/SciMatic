@@ -1,5 +1,3 @@
-from . import convenient_utils
-
 '''
 SciMatic
 A lightweight Python library for
