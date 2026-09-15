@@ -125,8 +125,8 @@ sin_law('SSA', 3, 4, 120, print_result=True)
 sin_law('SSA', 5, 8, 30, print_result=True)
 sin_law('SSA', 8, 10, 30, print_result=True)
 
-# Output: Angle B = 20, Side b = 4.038, Side c = 1.603
-# Output: Angle A = 3, Side b = 29.29, Side c = 31.47
+# Output: Angle B = 20, Side b = 2.227, Side c = 1.185
+# Output: Angle A = 3, Side b = 29.274, Side c = 30.520
 # Output: No valid triangle is formed...
 # Output: [{'angle B': 53.130, 'angle C': 96.870, 'side b': 9.928}]
 # Output: [{'angle B': 38.682, 'angle C': 111.318, 'side b': 14.905}, {'angle B': 141.318, 'angle C': 8.682, 'side b': 2.415}]
@@ -142,7 +142,7 @@ cos_law('SSS', 2, 3, 4, print_result=True)
 cos_law('SAS', 2, 50, 4, print_result=True)
 
 # Output: Angle A: 28.955, Angle B: 46.567, Angle C: 104.478
-# Output: side c: 3.013, Angle A: 30.10, Angle B: 99.90
+# Output: side c: 3.117, Angle A: 29.441, Angle B: 100.559
 ```
 
 ### - niche.py
@@ -208,7 +208,7 @@ import scimatic.scientific.mechanics.momentum as momentum
 
 momentum(25, 60, print_result=True)
 
-# Output: Momentum: 670.56 kg•m/s
+# Output: Momentum: 1500 kg•m/s
 ```
 
 ```impulse(force, initial_time, final_time, print_result=False, return_deltat=False)```
@@ -253,27 +253,27 @@ print(AND(1, 0))
 #		False
 ```
 
-```not_gate(value, binary=False)```
+```NOT(value, binary=False)```
 
 ```python
-from scimatic.c_engineering.logic_gates import not_gate
+from scimatic.c_engineering.logic_gates import NOT
 
-print(not_gate(1))
-print(not_gate(0))
+print(NOT(1))
+print(NOT(0))
 
 # Output: False
 # Output: True
 ```
 
-```or_gate(a, b, binary=False)```
+```OR(a, b, binary=False)```
 
 ```python
-from scimatic.c_engineering.logic_gates import or_gate
+from scimatic.c_engineering.logic_gates import OR
 
-print(or_gate(0, 0))
-print(or_gate(0, 1))
-print(or_gate(1, 0))
-print(or_gate(1, 1))
+print(OR(0, 0))
+print(OR(0, 1))
+print(OR(1, 0))
+print(OR(1, 1))
 
 # Output: False
 # Output: True
@@ -281,15 +281,15 @@ print(or_gate(1, 1))
 # Output: True
 ```
 
-```nand_gate(a, b, binary=False)```
+```NAND(a, b, binary=False)```
 
 ```python
-from scimatic.c_engineering.logic_gates import nand_gate
+from scimatic.c_engineering.logic_gates import NAND
 
-print(nand_gate(0, 0))
-print(nand_gate(0, 1))
-print(nand_gate(1, 0))
-print(nand_gate(1, 1))
+print(NAND(0, 0))
+print(NAND(0, 1))
+print(NAND(1, 0))
+print(NAND(1, 1))
 
 # Output: True
 # Output: True
@@ -297,14 +297,14 @@ print(nand_gate(1, 1))
 # Output: False
 ```
 
-```nor_gate(a, b, binary=False)```
+```NOR(a, b, binary=False)```
 ```python
-from scimatic.c_engineering.logic_gates import nor_gate
+from scimatic.c_engineering.logic_gates import NOR
 
-print(nor_gate(0, 0))
-print(nor_gate(0, 1))
-print(nor_gate(1, 0))
-print(nor_gate(1, 1))
+print(NOR(0, 0))
+print(NOR(0, 1))
+print(NOR(1, 0))
+print(NOR(1, 1))
 
 # Output: True
 # Output: False
@@ -313,14 +313,14 @@ print(nor_gate(1, 1))
 ```
 
 
-```xor_gate(a, b, binary=False)```
+```XOR(a, b, binary=False)```
 ```python
-from scimatic.c_engineering.logic_gates import xor_gate
+from scimatic.c_engineering.logic_gates import XOR
 
-print(xor_gate(0, 0))
-print(xor_gate(0, 1))
-print(xor_gate(1, 0))
-print(xor_gate(1, 1))
+print(XOR(0, 0))
+print(XOR(0, 1))
+print(XOR(1, 0))
+print(XOR(1, 1))
 
 # Output: False
 # Output: True
@@ -328,14 +328,14 @@ print(xor_gate(1, 1))
 # Output: False
 ```
 
-```xnor_gate(a, b, binary=False)```
+```XNOR(a, b, binary=False)```
 ```python
-from scimatic.c_engineering.logic_gates import xnor_gate
+from scimatic.c_engineering.logic_gates import XNOR
 
-print(xnor_gate(0, 0))
-print(xnor_gate(0, 1))
-print(xnor_gate(1, 0))
-print(xnor_gate(1, 1))
+print(XNOR(0, 0))
+print(XNOR(0, 1))
+print(XNOR(1, 0))
+print(XNOR(1, 1))
 
 # Output: True
 # Output: False
@@ -351,7 +351,7 @@ from scimatic.c_engineering.seg_7display import display_to_7seg
 
 print(display_to_7seg("8"))
 
-# Output: 1111111
+# Output: (1, 1, 1, 1, 1, 1, 1)
 ```
 Note: The "8" character activates every segment of the display.
 
@@ -395,11 +395,11 @@ print(full_adder(1, 1, 1))
 
 • Note: As of 1.40.0, the 3 functions below strictly need a list of booleans, I am working on a fix to this issue as soon as possible.
 
-```flick(digits, binary=False)```
+```flick_once(digits, binary=False)```
 ```python
-from scimatic.c_engineering.signals import flick
+from scimatic.c_engineering.signals import flick_once
 
-print(flick([1, 0, 1, 1]))
+print(flick_once([True, False, True, True]))
 
 # Output: [False, True, False, False]
 ```
@@ -410,9 +410,9 @@ print(flick([1, 0, 1, 1]))
 from scimatic.c_engineering.signals import delay
 import asyncio
 
-print(asyncio.run(delay([1, 0, 1], 1)))
+print(asyncio.run(delay([True, False, True], 1)))
 
-# Output: -1s-> [False, True, True]
+# Output: -1s-> [False, True, False]
 ```
 • Note: The signal is delayed by the specified duration.
 
@@ -422,15 +422,15 @@ from scimatic.c_engineering.signals import pulse
 import asyncio
 
 async def main():
-		async for p in pulse([1, 0, 1], 3, 0.5):
+		async for p in pulse([True, False, True], 3, 0.5):
 				print(p)
-asyncio.run(main)
+asyncio.run(main())
 
 # Output: [False, True, False] -0.5s-> [True, False, True] -0.5-> [False, True, False]
 ```
 • Note: The signal is repeated for the specified number of iterations, with the given interval between pulses.
 
-• Note: ```pulse()``` and ```delay()``` are async functions so you would need ```asyncio``` to run these functions.a
+• Note: ```pulse()``` and ```delay()``` are async functions so you would need ```asyncio``` to run these functions.
 
 ### Binary Mode
 
@@ -442,9 +442,9 @@ asyncio.run(main)
 
 For example:
 ```python
-from scimatic.c_engineering.logic_gates import xor_gate
+from scimatic.c_engineering.logic_gates import XOR
 
-print(xor_gate(1, 0, binary=True))
+print(XOR(1, 0, binary=True))
 
 1
 ```
