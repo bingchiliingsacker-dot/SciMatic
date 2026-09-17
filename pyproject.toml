@@ -11,6 +11,9 @@ description = 'A Python library for mathematics, science calculations, compter e
 readme = 'README.md'
 requires-python = '>=3.9'
 license = { text = 'MIT' }
+dependencies = [
+    'platformdirs'
+]
 
 authors = [
     { name = 'TheCursedOne' }
