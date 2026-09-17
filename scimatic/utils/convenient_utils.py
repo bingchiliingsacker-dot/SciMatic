@@ -20,72 +20,109 @@ PEMDAS = {
 Operator = Literal['+', '-', '×', '•', '*', '^', '÷', '/', '//', '%', '!', '|', '(', ')', '<', '>', '<=', '>=', '==', '=', '!=', '≈', '≠']
 
 class CreateParsable:
-	def __init__(self, syntax):
-		self.syntax = syntax
-	
-	def parse_letter(self) -> list[str]:
-		output = []
-		for s in self.syntax:
-			if s == ' ':
-				continue
-			output.append(s)
-		return output
-	
-	def parse_word(self) -> list[str]:
-		output = []
-		word = ''
-		
-		for s in self.syntax:
-			if s == ' ':
-				if word:
-					output.append(word)
-					word = ''
-				continue
-				
-			word += s
-		
-		output.append(word)
-		
-		return output
-	
-	def parse_token(self) -> list:
-		output = []
-		word = ''
-		s = self.syntax
-	
-		def flush():
-			nonlocal word
-			if word:
-				try:
-					output.append(int(word))
-				except ValueError:
-					try:
-						output.append(float(word))
-					except ValueError:
-						output.append(word)
-			word = ''
-	
-		i = 0
-		while i < len(s):
-			ch = s[i]
-			if ch == ' ':
-				flush()
-				i += 1
-				continue
-			if ch in '()+-*/%':
-				flush()
-				if s[i:i+2] in ('**', '//'):
-					output.append(s[i:i+2])
-					i += 2
-				else:
-					output.append(ch)
-					i += 1
-				continue
-			word += ch
-			i += 1
-	
-		flush()
-		return output
+    def __init__(self, syntax):
+        self.syntax = syntax
+
+    def parse_letter(self, print_result=False) -> list[str]:
+        output = []
+
+        for s in self.syntax:
+            if s == ' ':
+                continue
+
+            output.append(s)
+
+        if print_result:
+            print(output)
+
+        return output
+
+    def parse_word(self, print_result=False) -> list[str]:
+        output = []
+        word = ''
+
+        for s in self.syntax:
+            if s == ' ':
+                if word:
+                    output.append(word)
+                    word = ''
+                continue
+
+            word += s
+
+        if word:
+            output.append(word)
+
+        if print_result:
+            print(output)
+
+        return output
+
+    def parse_token(self, print_result=False) -> list:
+        output = []
+        word = ''
+        s = self.syntax
+
+        def flush():
+            nonlocal word
+
+            if word:
+                try:
+                    output.append(int(word))
+                except ValueError:
+                    try:
+                        output.append(float(word))
+                    except ValueError:
+                        output.append(word)
+
+            word = ''
+
+        i = 0
+
+        while i < len(s):
+            ch = s[i]
+
+            if ch == ' ':
+                flush()
+                i += 1
+                continue
+
+            if ch == '-' and i + 1 < len(s):
+                next_char = s[i + 1]
+
+                if (
+                    next_char.isdigit()
+                    or next_char == '-'
+                ) and (
+                    not output
+                    or (
+                        isinstance(output[-1], str)
+                        and output[-1] in '()+-*/%'
+                    )
+                ):
+                    word += ch
+                    i += 1
+                    continue
+
+            if ch in '()+-*/%':
+                if s[i:i + 2] in ('**', '//'):
+                    output.append(s[i:i + 2])
+                    i += 2
+                else:
+                    output.append(ch)
+                    i += 1
+
+                continue
+
+            word += ch
+            i += 1
+
+        flush()
+
+        if print_result:
+            print(output)
+
+        return output
 
 def calculate(
 	expression: str,
