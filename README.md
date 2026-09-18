@@ -66,6 +66,19 @@ SciMatic also offers functions that are in the computer engineering field.
 - Half/Full Adders
 - High-Performance signal flickers
 
+# Databasing
+SciMatic also offers a database to store all the returned values with just a decorator.
+- Storing returned values, no matter the type
+- displaying the values stored
+- deleting certain functions
+
+# Conversion
+SciMatic has functions that can convert certain measures from time, measurements, etc.
+- Imperial-to-metric conversion(v.v.)(from quetto to quetta)
+- Currency conversion(uses another database for offline mode)
+- temperature conversion(supports °C, °F, k, °R, °Ré)
+- Time conversion
+
 ---
 
 # Installation
@@ -183,7 +196,9 @@ SciMatic/
 ├──LICENSE
 |
 ├── src/
-|   └── lib.rs
+|   ├── lib.rs
+|   ├── flipper.rs
+|   └── b2b_translator.rs
 |
 └── scimatic/
     |
@@ -191,7 +206,18 @@ SciMatic/
     |
     ├── __init__.py
     |
-    ├── convenient_utils.py
+    ├── utils/
+    |    ├── __init__.py
+    |    ├── databasing.py
+    |    ├── convenient_utils.py
+    |    └── conversion/
+    |        ├── __init__.py
+    |        ├── currency.py
+    |        ├── data.py
+    |        ├── measurements.py
+    |        ├── time.py
+    |        ├── temperature.py
+    |        └── weight.py
     |
     ├── c_engineering/
     |   ├── __init__.py
