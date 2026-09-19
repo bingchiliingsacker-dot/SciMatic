@@ -2,21 +2,12 @@ from typing import AsyncGenerator
 from scimatic import flicker_module
 import time
 import asyncio
-import random
-
-def flick_once(
-        vecbools: list[bool],
-        binary: bool = False,
-) -> list[bool | int]:
-
-    output = flicker_module.flick(vecbools, binary)
-
-    return output
 
 async def delay(
         vecbools: list[bool],
         seconds: float,
-        binary: bool = False
+        binary: bool = False,
+        print_result: bool = False
 ) -> list[bool | int]:
 
     start = time.perf_counter()
@@ -28,13 +19,16 @@ async def delay(
     elapsed = end - start
 
     await asyncio.sleep(max(0, seconds - elapsed))
+    
+    if print_result:
+    	print(output)
     return output
 
 async def pulse(
         vecbools: list[bool],
         iterations: int,
         time_interval: float,
-        binary: bool = False,
+        binary: bool = False
 ) -> AsyncGenerator[list[bool | int], None]:
 
     state = vecbools
