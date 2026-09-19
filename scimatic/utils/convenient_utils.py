@@ -236,45 +236,105 @@ def factorial(
 
 #---------------SPECIAL VALUES---------------#
 def int64_limit(
-	unsigned: bool = False, 
-	negative_value: bool = False
+        unsigned: bool = False, 
+        negative_value: bool = False,
+        print_result: bool = False
 ) -> int:
-	
-	if unsigned:
-		return 2**64 - 1 if not negative_value else 0
-		
-	else:
-		return 2**63 - 1 if not negative_value else -2**63
+
+        if unsigned:
+                output = 2**64 - 1 if not negative_value else 0
+
+        else:
+                output = 2**63 - 1 if not negative_value else -2**63
+        
+        if print_result:
+        	print(output)
+        return output
+
+def int32_limit(
+        unsigned: bool = False, 
+        negative_value: bool = False,
+        print_result: bool = False
+) -> int:
+
+        if unsigned:
+                output = 2**31 - 1 if not negative_value else 0
+
+        else:
+                output = 2**31 - 1 if not negative_value else -2**31
+        
+        if print_result:
+        	print(output)
+        return output
+
+def int16_limit(
+        unsigned: bool = False, 
+        negative_value: bool = False,
+        print_result: bool = False
+) -> int:
+
+        if unsigned:
+                output = 2**16 - 1 if not negative_value else 0
+
+        else:
+                output = 2**15 - 1 if not negative_value else -2**15
+        
+        if print_result:
+        	print(output)
+        return output
+
+def int8_limit(
+        unsigned: bool = False, 
+        negative_value: bool = False,
+        print_result: bool = False
+) -> int:
+
+        if unsigned:
+                output = 2**8 - 1 if not negative_value else 0
+
+        else:
+                output = 2**7 - 1 if not negative_value else -2**7
+        
+        if print_result:
+        	print(output)
+        return output
 
 def pi(
-	decimal: int | None = None
+        decimal: int | None = None,
+        print_result: bool = False
 ) -> Decimal:
-	
-	getcontext().prec = 100
-	negative_value = False
-	
-	processor = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
-	output = '3.'
-	true_output = ''
 
-	if decimal is None:
-		output += processor
-		return Decimal(output)
-	
-	if decimal < 0:
-		decimal *= decimal
-		decimal /= 2
-		negative_value = True
-	
-	if decimal > 100:
-		raise ValueError('Decimal parameter is higher than 100.')
-	
-	for i in range(int(round(decimal))):
-		output += processor[i]
+    getcontext().prec = 100
+    negative_value = False
 
-	if negative_value:
-		true_output += '-'
+    processor = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
+    output = '3.'
+    true_output = ''
 
-	true_output += output
-	
-	return Decimal(true_output)
+    if decimal is None:
+        output += processor
+
+        if print_result:
+            print(output)
+
+        return Decimal(output)
+
+    if decimal < 0:
+        decimal = abs(decimal)
+        negative_value = True
+
+    if decimal > 100:
+        raise ValueError('Decimal parameter is higher than 100.')
+
+    for i in range(int(round(decimal))):
+        output += processor[i]
+
+    if negative_value:
+        true_output += '-'
+
+    true_output += output
+
+    if print_result:
+        print(true_output)
+
+    return Decimal(true_output)
