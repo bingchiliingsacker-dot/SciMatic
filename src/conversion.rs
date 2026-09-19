@@ -33,7 +33,7 @@ pub fn convert_binary(
     if print_result {
         py.import("builtins")?
             .getattr("print")?
-            .call1((output,))?;
+            .call1((&output,))?;
     }
 
     Ok(output.unbind())
