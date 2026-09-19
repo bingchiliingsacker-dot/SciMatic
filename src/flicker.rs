@@ -12,12 +12,13 @@ pub fn flick(
 
     for b in vectorbools {
         if binary {
-        				let v: u8 = b.extract(py)?;
-            output.append(if b == 0 { 1 } else { 0 })?;
+            let v: u8 = b.extract(py)?;
+            output.append(if v == 0 { 1 } else { 0 })?;
         } else {
-        				let v: bool = b.extract(py)?;
-            output.append(!)?;
+            let v: bool = b.extract(py)?;
+            output.append(!v)?;
         }
     }
+
     Ok(output.unbind())
 }
