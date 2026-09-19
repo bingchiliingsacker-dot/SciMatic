@@ -11,6 +11,6 @@ fn flicker_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
 #[pymodule]
 fn rs_converters(m: &Bound<'_, PyModule>) -> PyResult<()> {
-				m.add_function(wrap_pyfunction!(b2b::convert_binary, m)?)?;
+				m.add_function(wrap_pyfunction!(conversion::convert_binary, m)?)?;
 				Ok(())
 }
