@@ -5,9 +5,9 @@ use pyo3::types::PyList;
 #[pyo3(signature = (b, print_result=false))]
 pub fn convert_binary(
     py: Python<'_>,
-    b: Vec<PyObject>,
+    b: Vec<Py<PyAny>>,
     print_result: bool,
-) -> PyResult<Py<PyAny>> {
+) -> PyResult<Py<PyList>> {
     let output = PyList::empty(py);
 
     for binary in b {
@@ -29,7 +29,7 @@ pub fn convert_binary(
             ));
         }
     }
-    
+
     if print_result {
         py.import("builtins")?
             .getattr("print")?
