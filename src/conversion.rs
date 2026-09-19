@@ -7,7 +7,7 @@ pub fn convert_binary(
     py: Python<'_>,
     b: Vec<PyObject>,
     print_result: bool,
-) -> PyResult<Py<PyList>> {
+) -> PyResult<Py<PyAny>> {
     let output = PyList::empty(py);
 
     for binary in b {
