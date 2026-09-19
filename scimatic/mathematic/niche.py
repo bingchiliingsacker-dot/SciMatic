@@ -37,9 +37,6 @@ def ackermann(
 	m: int,
 	n: int
 ):
-	if m > 3:
-		print('The value of m is too high for python. If you want to have a niche that does not grow that quickly, I will recommend TREE.')
-		return
 	array.append((m, n))
 
 	if m == 0:
