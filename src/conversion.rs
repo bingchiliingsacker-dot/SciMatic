@@ -36,4 +36,3 @@ pub fn convert_binary(
 
     Ok(output.unbind())
 }
-}
