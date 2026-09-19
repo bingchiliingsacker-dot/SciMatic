@@ -112,6 +112,24 @@ import scimatic.mathematic.statistics.median as median
 median([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], print_result=True)
 # Output: 6.0
 ```
+
+```mean(raw_data, print_result=False)```
+```python
+from scimatic.mathematic.statistics import mean
+
+mean([1, 1, 2, 2, 3], print_result=True)
+
+# Output: 2.2
+```
+
+```mode(raw_data, k=1, print_result=False)```
+```python
+from scimatic.mathematic.statistics import mode
+
+mode([2, 3, 3, 3, 4, 4, 5], k=2, print_result=True)
+
+# Output: [3, 4]
+```
 • Note: Statistical Functions can have an unsorted input and the same result applies
 
 ### - geometry.py
@@ -395,22 +413,22 @@ print(full_adder(1, 1, 1))
 
 • Note: As of 1.40.0, the 3 functions below strictly need a list of booleans, I am working on a fix to this issue as soon as possible.
 
-```flick_once(digits, binary=False)```
+```flick(digits, binary=False, print_result=False)```
 ```python
-from scimatic.c_engineering.signals import flick_once
+from scimatic import flick
 
-print(flick_once([True, False, True, True]))
+flick([True, False, True, True], print_result=True)
 
 # Output: [False, True, False, False]
 ```
 • Note: The function processes the supplied signal and produces a flickering signal.
 
-```delay(digits, duration, binary=False)```
+```delay(digits, duration, binary=False, print_result=False)```
 ```python
 from scimatic.c_engineering.signals import delay
 import asyncio
 
-print(asyncio.run(delay([True, False, True], 1)))
+asyncio.run(delay([True, False, True], 1, print_result=True))
 
 # Output: -1s-> [False, True, False]
 ```
@@ -520,20 +538,21 @@ print(int64_limit(unsigned=True) # if negative_value is True, 0
 # Output: 9,223,372,036,854,775,807
 # Output: 18,446,744,073,709,551,615
 ```
+- Theres also an int32, int16, and int8 limit but their parameters are the same, only difference is the naming.
 
-```pi(decimal=None)```
+```pi(decimal=None, print_result=True)```
 
 ```python
 from scimatic.utils.convenient_utils import pi
 
-print(pi())
-print(pi(2))
+pi(print_result=True)
+pi(2, print_result=True)
 
 # Output: 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
 # Output: 3.14
 ```
 
-### databasing.py(new addition)
+### databasing.py
 ```Database()```
 - The class that contains all of ```databasing.py```'s functions
 - This class uses an sqlite3 database file(redirected to users application data directory to prevent PermissionError)
@@ -611,3 +630,67 @@ db.reset(print_result=True)
 # Output: Database reset successfully.
 ```
 - Warning: reset() deletes everything inside data.db
+
+## conversion/
+
+### - measurements.py
+```convert_len(n, u_sym1, u_sym2, print_result=False)```
+```python
+from scimatic.utils.conversion.measurements import convert_len
+
+convert_len(1, 'in', 'm', print_result=True)
+
+# Output: 1in -> 0.0254m
+```
+
+```convert_area(n, u_sym1, u_sym2, print_result=False)```
+```python
+from scimatic.utils.conversion.measurements import convert_area
+
+convert_area(1, 'in2', 'm2', print_result=True)
+
+# Output: 1in2 -> 0.00064516m2
+```
+
+### - time.py
+```convert_time(t, t_sym1, t_sym2, print_result=False)```
+```python
+from scimatic.utils.conversion.time import convert_time
+
+convert_time(1, 's', 'ms', print_result=True)
+
+# Output: 1s -> 1000ms
+```
+
+### - data.py
+```convert_bits(b, b_sym1, b_sym2, print_result=False)```
+```python
+from scimatic.utils.conversion.data import convert_bits
+
+convert_bits(1, 'b', 'B', print_result=True)
+
+# Output: 1b -> 0.125B
+```
+
+### - weight.py
+```convert_weight(w, w_sym1, w_sym2, print_result=False```
+```python
+from scimatic.utils.conversion.weight import convert_weight
+
+convert_weight(1, 'kg', 'g', print_result=True)
+
+# Output: 1kg -> 1000g
+```
+
+### - currency.py
+- This one is the elephant in the room, it requires internet as it needs to use [frankfurter](https://frankfurter.dev/)(a website that documents 205 currencies rate of change).
+- Good thing I created an offline mode just for y'all(my non-existent users) which stores the rate of change in... you guessed it, sqlite3.
+
+```fresh_convert_curr(money, curr1, curr2, id=None, save_offline=True, use_offline_db=False, reset_db=False, print_result=False)```
+```python
+from scimatic.utils.conversion.currency import fresh_convert_curr
+
+fresh_convert_curr(1, 'USD', 'PHP', print_result=True) # The result will store in the database
+
+# Output: 1USD -> around 62PHP as of 2026
+```
