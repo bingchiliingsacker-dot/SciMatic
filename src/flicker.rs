@@ -5,7 +5,7 @@ use pyo3::types::PyList;
 #[pyo3(signature = (vectorbools, binary=false))]
 pub fn flick(
     py: Python<'_>,
-    vectorbools: Vec<PyObject>,
+    vectorbools: Vec<Py<PyAny>>,
     binary: bool,
 ) -> PyResult<Py<PyList>> {
     let output = PyList::empty(py);
