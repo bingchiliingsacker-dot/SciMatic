@@ -60,19 +60,27 @@ Format for 7-segment display:
 
 def display_to_7seg(
 	character: str,
-	binary: bool = False
+	binary: bool = False,
+	print_result: bool = False
 ) -> tuple:
 	
 	try:
 		value = SEGMENTS[character.upper()]
 	except KeyError as e:
-		print(f'Key is not found {e}')
-		print('---AVAILABLE-CHARACTERS---')
-		for key in SEGMENTS.keys():
-			print(key)
+		if print_result:
+			print(f'Key is not found {e}')
+			print('---AVAILABLE-CHARACTERS---')
+			for key in SEGMENTS.keys():
+				print(key)
 		return (0, 0, 0, 0, 0, 0, 0)
 	
+	output = tuple(bool(x) for x in value)
+	
 	if binary:
+		if print_result:
+			print(value)
 		return value
 	
-	return tuple(bool(x) for x in value)
+	if print_result:
+		print(output)
+	return output
