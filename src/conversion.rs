@@ -1,5 +1,5 @@
 use pyo3::prelude::*;
-use pyo3::types::{PyBool, PyInt, PyList};
+use pyo3::types::PyList;
 
 #[pyfunction]
 #[pyo3(signature = (b, print_result=false))]
@@ -29,9 +29,11 @@ pub fn convert_binary(
             ));
         }
     }
-
+    
     if print_result {
-        println!("{:?}", output);
+        py.import("builtins")?
+            .getattr("print")?
+            .call1((output,))?;
     }
 
     Ok(output.unbind())
