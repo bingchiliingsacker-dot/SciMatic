@@ -99,3 +99,35 @@ def median(raw_data: List[Number], print_result: bool = False) -> float:
         print('Position:', position)
 
     return _interpolate(processed_data, position)
+
+def mean(
+	raw_data: list[Number],
+	print_result: bool = False
+) -> float:
+	
+	output = sum(raw_data) / len(raw_data)
+	
+	if print_result:
+		print(output)
+	return output
+
+def mode(
+	raw_data: list[Number],
+	k: int = 1,
+	print_result: bool = False
+) -> list[Number]:
+	
+	hashmap = {}
+	
+	for r in raw_data:
+		if r not in hashmap:
+			hashmap[r] = 0
+		hashmap[r] += 1
+	
+	hashmap = sorted(hashmap.items(), key=lambda x: x[1], reverse=True)
+	
+	output = [value for value, _ in hashmap[:k]]
+	
+	if print_result:
+		print(output)
+	return output
