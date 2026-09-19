@@ -1,7 +1,7 @@
 mod flicker;
 mod conversion;
 
-use pyo3::prelude::*;
+use pyo3::prelude::*;
 
 #[pymodule]
 fn flicker_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -11,6 +11,6 @@ fn flicker_module(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
 #[pymodule]
 fn rs_converters(m: &Bound<'_, PyModule>) -> PyResult<()> {
-				m.add_function(wrap_pyfunction!(conversion::convert_binary, m)?)?;
-				Ok(())
+    m.add_function(wrap_pyfunction!(conversion::convert_binary, m)?)?;
+    Ok(())
 }
