@@ -99,7 +99,7 @@ Basic calculations
 ```
 import scimatic
 
-print(scimatic.factorial(5))
+print(scimatic.utils.convenient_utils.factorial(5))
 ```
 Output:
 ```
