@@ -1,5 +1,8 @@
 from typing import Literal
 from decimal import Decimal, getcontext
+from pathlib import Path
+import json
+import sys
 
 PEMDAS = {
 	'(': 1,
@@ -19,116 +22,249 @@ PEMDAS = {
 
 Operator = Literal['+', '-', '×', '•', '*', '^', '÷', '/', '//', '%', '!', '|', '(', ')', '<', '>', '<=', '>=', '==', '=', '!=', '≈', '≠']
 
+def _default_path() -> Path:
+	if sys.platform == 'win32':
+		return Path.home() / 'Downloads'
+
+	if sys.platform == 'android' or Path('/storage/emulated/0').exists():
+		return Path('/storage/emulated/0') / 'Download'
+
+	# Linux/macOS: honor XDG if set, else fall back to ~/Downloads
+	import os
+	xdg = os.environ.get('XDG_DOWNLOAD_DIR')
+	return Path(xdg) if xdg else Path.home() / 'Downloads'
+
+
+PATH = _default_path()
+PATH.mkdir(parents=True, exist_ok=True)
+
 class CreateParsable:
-    def __init__(self, syntax):
-        self.syntax = syntax
+	def __init__(self, syntax):
+		self.syntax = syntax
 
-    def parse_letter(self, print_result=False) -> list[str]:
-        output = []
+	def parse_letter(self, print_result=False) -> list[str]:
+		output = []
 
-        for s in self.syntax:
-            if s == ' ':
-                continue
+		for s in self.syntax:
+			if s == ' ':
+				continue
 
-            output.append(s)
+			output.append(s)
 
-        if print_result:
-            print(output)
+		if print_result:
+			print(output)
 
-        return output
+		return output
 
-    def parse_word(self, print_result=False) -> list[str]:
-        output = []
-        word = ''
+	def parse_word(self, print_result=False) -> list[str]:
+		output = []
+		word = ''
 
-        for s in self.syntax:
-            if s == ' ':
-                if word:
-                    output.append(word)
-                    word = ''
-                continue
+		for s in self.syntax:
+			if s == ' ':
+				if word:
+					output.append(word)
+					word = ''
+				continue
 
-            word += s
+			word += s
 
-        if word:
-            output.append(word)
+		if word:
+			output.append(word)
 
-        if print_result:
-            print(output)
+		if print_result:
+			print(output)
 
-        return output
+		return output
 
-    def parse_token(self, print_result=False) -> list:
-        output = []
-        word = ''
-        s = self.syntax
+	def parse_token(self, print_result=False) -> list:
+		output = []
+		word = ''
+		s = self.syntax
 
-        def flush():
-            nonlocal word
+		def flush():
+			nonlocal word
 
-            if word:
-                try:
-                    output.append(int(word))
-                except ValueError:
-                    try:
-                        output.append(float(word))
-                    except ValueError:
-                        output.append(word)
+			if word:
+				try:
+					output.append(int(word))
+				except ValueError:
+					try:
+						output.append(float(word))
+					except ValueError:
+						output.append(word)
 
-            word = ''
+			word = ''
 
-        i = 0
+		i = 0
 
-        while i < len(s):
-            ch = s[i]
+		while i < len(s):
+			ch = s[i]
 
-            if ch == ' ':
-                flush()
-                i += 1
-                continue
+			if ch == ' ':
+				flush()
+				i += 1
+				continue
 
-            if ch == '-' and i + 1 < len(s):
-                next_char = s[i + 1]
+			if ch == '-' and i + 1 < len(s):
+				next_char = s[i + 1]
 
-                if (
-                    next_char.isdigit()
-                    or next_char == '-'
-                ) and (
-                    not output
-                    or (
-                        isinstance(output[-1], str)
-                        and output[-1] in '()+-*/%'
-                    )
-                ):
-                    word += ch
-                    i += 1
-                    continue
+				if (
+					next_char.isdigit()
+					or next_char == '-'
+				) and (
+					not output
+					or (
+						isinstance(output[-1], str)
+						and output[-1] in '()+-*/%'
+					)
+				):
+					word += ch
+					i += 1
+					continue
 
-            if ch in '()+-*/%':
-                if s[i:i + 2] in ('**', '//'):
-                    output.append(s[i:i + 2])
-                    i += 2
-                else:
-                    output.append(ch)
-                    i += 1
+			if ch in '()+-*/%':
+				flush()
 
-                continue
+				if s[i:i + 2] in ('**', '//'):
+					output.append(s[i:i + 2])
+					i += 2
+				else:
+					output.append(ch)
+					i += 1
 
-            word += ch
-            i += 1
+				continue
 
-        flush()
+			word += ch
+			i += 1
 
-        if print_result:
-            print(output)
+		flush()
 
-        return output
+		if print_result:
+			print(output)
+
+		return output
+
+	def parse_kwargs(
+		self,
+		save_json: bool = False,
+		print_result: bool = False
+	) -> dict:
+
+		if self.syntax.find('=') == -1:
+			raise ValueError(
+				f'Text invalid: \'=\' expected, got \'{self.syntax}\'.'
+			)
+
+		value = ''
+		val_num = 0
+		key = ''
+		output = {}
+		equal = False
+		quoted = False
+
+		for s in self.syntax:
+			if s == '"' and not quoted:
+				quoted = True
+				continue
+
+			elif s == '"' and quoted:
+				quoted = False
+				continue
+
+			if s == '=':
+				if not key:
+					raise KeyError('Expected key argument, got None.')
+				else:
+					equal = True
+					continue
+
+			if s == '"':
+				quoted = True
+
+			if s == ' ' and not quoted:
+				if not value:
+					output[key] = None
+				else:
+					try:
+						val_num = int(value)
+					except ValueError:
+						try:
+							val_num = float(value)
+						except ValueError:
+							output[key] = value
+							key = ''
+							value = ''
+							equal = False
+							continue
+
+					output[key] = val_num
+
+				key = ''
+				value = ''
+				val_num = 0
+				equal = False
+				continue
+
+			if not equal:
+				key += s
+			else:
+				value += s
+
+		if key:
+			if not value:
+				output[key] = None
+			else:
+				try:
+					val_num = int(value)
+					output[key] = val_num
+				except ValueError:
+					try:
+						val_num = float(value)
+						output[key] = val_num
+					except ValueError:
+						output[key] = value
+
+		if 'json' not in output and save_json:
+			raise ValueError('No json key argument given.')
+
+		if 'json' in output and save_json:
+			if output['json'] is None:
+				print('Tip: File cannot be None.')
+				print('No JSON file found.')
+				raise FileNotFoundError(
+					'Key argument json does not have a file.'
+				)
+
+			location = PATH / output['json']
+
+			if not location.exists():
+				location.touch()
+
+			with location.open('w') as f:
+				del output['json']
+				json.dump(output, f)
+
+		if print_result:
+			print(output)
+
+		return output
+
+
+def exponentiate_right(*args):
+	output = args[-1]
+
+	for a in args[-2::-1]:
+		output = a**output
+
+	return output
+
 
 def calculate(
 	expression: str,
 	print_result: bool = False
 ) -> int | float | None:
-	
+
 	'''
 	Note: calculate() was created as a safer
 	alternative to eval()
@@ -138,72 +274,117 @@ def calculate(
 		if print_result:
 			print(expression)
 		return expression
-	
+
 	processor = []
-	
+
 	parsableobj = CreateParsable(expression)
-	
+
 	processor.extend(parsableobj.parse_token())
-	
+
 	def reduce_operators(processor: list[int | float | str]):
 		processor = processor[:]
+
 		while len(processor) > 1:
 			try:
 				highest = min(
-				(token for token in processor if token in PEMDAS and token not in ('(', ')')),
-				key=lambda token: PEMDAS[token]
+					(
+						token
+						for token in processor
+						if token in PEMDAS
+						and token not in ('(', ')')
+					),
+					key=lambda token: PEMDAS[token]
 				)
 			except ValueError:
 				return processor[0]
-			
+
 			index = processor.index(highest)
 			left_token = processor[index - 1]
 			right_token = processor[index + 1]
 			operator = processor[index]
-				
+
 			if operator == '+':
 				result = left_token + right_token
+
 			elif operator == '-':
 				result = left_token - right_token
+
 			elif operator == '%':
 				result = left_token % right_token
+
 			elif operator == '//':
 				result = left_token // right_token
+
 			elif operator == '/':
 				try:
 					result = left_token / right_token
 				except ZeroDivisionError:
 					result = 0
+
 			elif operator == '*':
 				result = left_token * right_token
+
 			elif operator == '**':
-				result = left_token**right_token
+				tower = [left_token, right_token]
+				current = index
+
+				while current + 2 < len(processor):
+					if processor[current + 2] == operator:
+						current += 2
+						tower.append(processor[current + 1])
+					else:
+						break
+
+				if len(tower) == 2:
+					result = left_token**right_token
+				else:
+					result = exponentiate_right(*tower)
+
+				processor = (
+					processor[:index - 1]
+					+ [result]
+					+ processor[current + 2:]
+				)
+				continue
+
 			else:
-				raise ValueError(f'Unsupported operator {operator}.')
-				
-			processor = processor[:index - 1] + [result] + processor[index + 2:]
-		
+				raise ValueError(
+					f'Unsupported operator {operator}.'
+				)
+
+			processor = (
+				processor[:index - 1]
+				+ [result]
+				+ processor[index + 2:]
+			)
+
 		return processor[0]
-	
+
 	while '(' in processor:
 		stack = []
+
 		for i, tok in enumerate(processor):
 			if tok == '(':
 				stack.append(i)
-				
+
 			elif tok == ')':
 				start = stack.pop()
 				inner_tokens = processor[start + 1:i]
 				value = reduce_operators(inner_tokens)
-				processor = processor[:start] + [value] + processor[i + 1:]
+
+				processor = (
+					processor[:start]
+					+ [value]
+					+ processor[i + 1:]
+				)
 				break
-	
+
 	output = reduce_operators(processor)
-	
+
 	if print_result:
 		print(output)
-	return output
 
+	return output
 #---------------FACTORIAL---------------#
 def factorial(
 	n: int,
