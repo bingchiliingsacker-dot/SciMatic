@@ -23,7 +23,9 @@ SciMatic is built around modular mathematical tools.
 
  # Statistics
 
+- Mean
 - Median
+- Mode
 - Quartiles
 - Deciles
 - Percentiles
@@ -45,6 +47,7 @@ The parser can split input into:
 - Characters
 - Words
 - Tokens
+- Keyword Arguments
 
 It can also convert recognized tokens into numerical values such as integers and floats.
 
@@ -78,6 +81,12 @@ SciMatic has functions that can convert certain measures from time, measurements
 - Currency conversion(uses another database for offline mode)
 - temperature conversion(supports °C, °F, k, °R, °Ré)
 - Time conversion
+
+# CSV 
+SciMatic has functions that enable it to modify, duplicate, and read/write .csv files.
+- Serialization/Deserialization of CSV values
+- Read/Write .csv files
+- Special Bracket convention to distinguish SciMatic-Made duplicates from other common convention(example[1].csv)
 
 ---
 
@@ -197,8 +206,8 @@ SciMatic/
 |
 ├── src/
 |   ├── lib.rs
-|   ├── flipper.rs
-|   └── b2b_translator.rs
+|   ├── flicker.rs
+|   └── conversion.rs
 |
 └── scimatic/
     |
@@ -210,6 +219,7 @@ SciMatic/
     |    ├── __init__.py
     |    ├── databasing.py
     |    ├── convenient_utils.py
+    |    ├── csv.py
     |    └── conversion/
     |        ├── __init__.py
     |        ├── currency.py
@@ -306,9 +316,9 @@ The project is intended to expand into areas such as:
 
 ## Statistics
 
-- [ ] Mean
+- [x] Mean
 - [x] Median
-- [ ] Mode
+- [x] Mode
 - [x] Quartiles
 - [x] Percentiles
 - [x] Interpolation
@@ -324,7 +334,7 @@ The project is intended to expand into areas such as:
 
 ## Computer Engineering
 - [x] Logic Gates
-- [ ] Binary translation
+- [x] Binary translation
 - [x] 7-display
 - [x] Circuitry
 
@@ -335,7 +345,6 @@ The project is intended to expand into areas such as:
 - [ ] Performance optimization
 - [ ] Expanded API
 - [ ] Educational examples
-- [ ] Possible integration of a ```ans``` history system with sqlite3
 
 ---
 
