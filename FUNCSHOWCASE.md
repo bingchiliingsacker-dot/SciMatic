@@ -36,15 +36,34 @@ SciMatic uses SQLite to store data locally.
 - Python's standard-library interface for working with SQLite databases.
 - SQLite is a lightweight, serverless database engine that is in the public domain.
 
----
+### CSV
+- CSV (Comma-Separated Values) is a plain-text format commonly used to store tabular data.
+- Values are typically separated by commas, while rows are separated by newlines.
+- SciMatic provides a custom `CSV` class for reading, writing, parsing, modifying, and duplicating CSV files.
 
+### Matrix
+- A matrix (plural: matrices) is a rectangular arrangement of values organized into rows and columns.
+- In SciMatic, matrices are represented using nested Python lists.
+- The length of the outer list (`len(matrix)`) represents the number of rows.
+- The length of each child list represents the number of columns.
+
+For example:
+
+```python
+matrix = [
+	[1, 2, 3],
+	[4, 5, 6]
+]
+```
+- In this example, the matrix contains 2 rows and 3 columns.
+---
 ## mathematic/
 
 ### - algebra.py
 ```quadratic_equation(a, b, c, x, print_result=False)```
 
 ```python
-import scimatic.mathematic.algebra.quadratic_equation as quadratic_equation
+from scimatic.mathematic.algebra import quadratic_equation
 
 quadratic_equation(1, 7, 3, 4, print_result=True)
 # Output: 47
@@ -53,7 +72,7 @@ quadratic_equation(1, 7, 3, 4, print_result=True)
 ```quadratic_formula(a, b, c, print_result=False, vietas_formula=False)```
 
 ```python
-import scimatic.mathematic.algebra.quadratic_formula as quadratic_formula
+from scimatic.mathematic.algebra import quadratic_formula
 
 quadratic_formula(1, 7, 3, print_result=True, vietas_formula=True)
 # Output: x1 = -0.459 x2 = -6.541, x1 + x2 = -7
@@ -62,7 +81,7 @@ quadratic_formula(1, 7, 3, print_result=True, vietas_formula=True)
 ```quadratic_inequality(a, b, c, symbol, print_result=False)```
 
 ```python
-import scimatic.mathematic.algebra.quadratic_inequality as quadratic_inequality
+from scimatic.mathematic.algebra import quadratic_inequality
 
 quadratic_inequality(1, 7, 3, '<', print_result=True)
 # Output: '-6.541 < x < -0.459'
@@ -71,19 +90,19 @@ quadratic_inequality(1, 7, 3, '<', print_result=True)
 ```pythagorean_theorem(a, b, c=None, print_result=False)```
 
 ```python
-import scimatic.mathematic.algebra.pythagorean_theorem as pythagorean_theorem
+from scimatic.mathematic.algebra import pythagorean_theorem
 
 pythagorean_theorem(1, 7, 3, print_result=True)
 pythagorean_theorem(1, 7, print_result=True)
 # Output: 3^2 = 1^2 + 7^2
-#									False
+#                                                                        False
 # Output: sqrt(1^2 + 7^2) = 5sqrt(2) or 7.071
 ```
 
 ### - statistics.py
 ```quartile(raw_data, k, print_result=False)```
 ```python
-import scimatic.mathematic.statistics.quartile as quartile
+from scimatic.mathematic.statistics import quartile
 
 quartile([1, 2, 3, 4, 5], 2, print_result=True)
 # Output: 3.0
@@ -91,7 +110,7 @@ quartile([1, 2, 3, 4, 5], 2, print_result=True)
 
 ```decile(raw_data, k, print_result=False)```
 ```python
-import scimatic.mathematic.statistics.decile as decile
+from scimatic.mathematic.statistics import decile
 
 decile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 5, print_result=True)
 # Output: 6.0
@@ -99,7 +118,7 @@ decile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 5, print_result=True)
 
 ```percentile(raw_data, k, print_result=False)```
 ```python
-import scimatic.mathematic.statistics.percentile as percentile
+from scimatic.mathematic.statistics import percentile
 
 percentile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 50, print_result=True)
 # Output: 6.0
@@ -107,7 +126,7 @@ percentile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], 50, print_result=True)
 
 ```median(raw_data, print_result=False)```
 ```python
-import scimatic.mathematic.statistics.median as median
+from scimatic.mathematic.statistics import median
 
 median([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], print_result=True)
 # Output: 6.0
@@ -135,7 +154,7 @@ mode([2, 3, 3, 3, 4, 4, 5], k=2, print_result=True)
 ### - geometry.py
 ```sin_law(case, a, b, c, print_result=False)```
 ```python
-import scimatic.mathematic.geometry.sin_law as sin_law
+from scimatic.mathematic.geometry import sin_law
 
 sin_law('SAA', 3, 40, 120, print_result=True)
 sin_law('ASA', 50, 2, 127, print_result=True)
@@ -154,7 +173,7 @@ sin_law('SSA', 8, 10, 30, print_result=True)
 ```cos_law(case, a, b, c, print_result=False)```
 
 ```python
-import scimatic.mathematic.geometry.cos_law as cos_law
+from scimatic.mathematic.geometry import cos_law
 
 cos_law('SSS', 2, 3, 4, print_result=True)
 cos_law('SAS', 2, 50, 4, print_result=True)
@@ -162,36 +181,72 @@ cos_law('SAS', 2, 50, 4, print_result=True)
 # Output: Angle A: 28.955, Angle B: 46.567, Angle C: 104.478
 # Output: side c: 3.117, Angle A: 29.441, Angle B: 100.559
 ```
+```
+area_circle()
+circumference_circle()
+volume_circular()
 
+perimeter_triangle()
+area_triangle()
+
+perimeter_parallelogram()
+area_parallelogram()
+
+perimeter_trapezoid()
+area_trapezoid()
+
+perimeter_square()
+area_square()
+
+perimeter_rect()
+area_rect()
+
+perimeter_polygon()
+area_polygon()
+
+volume_cube()
+volume_cuboid()
+volume_prism()
+volume_pyramid()
+```
+- These functions calculate the perimeter, area, or volume of their respective geometric shapes.
+- If you know any basic math, I am sure you can intuitively guess each ones parameters as it follows their respective formulas.
+```python
+from scimatic.mathematic.geometry import area_circle
+
+area_circle(40, print_result=True)
+
+# Output: 5026.54...
+```
 ### - niche.py
 ```fibonacci(iterations)```
 
 ```python
-import scimatic.mathematic.niche.fibonacci as fibonacci
+from scimatic.mathematic.niche import fibonacci
 
 fib = fibonacci(10)
 
 for value in fib:
-		print(value)
-		
+                print(value)
+
 # Output: 
-#		0
-#		1
-#		1
-#		2
-#		3
-#		5
-#		8
-#		13
-#		21
-#		34
-#		55
+#                0
+#                1
+#                1
+#                2
+#                3
+#                5
+#                8
+#                13
+#                21
+#                34
+#                55
 ```
 
 ```collatz(n, print_result=False)```
 
 ```python
-import scimatic.mathematic.niche.collatz as collatz
+from scimatic.mathematic.niche import collatz
 
 collatz(10, print_result=True)
 
@@ -201,7 +256,7 @@ collatz(10, print_result=True)
 ```ackermann(array, m, n)```
 
 ```python
-import scimatic.mathematic.niche.ackermann as ackermann
+from scimatic.mathematic.niche import ackermann
 
 initiator = []
 
@@ -222,7 +277,7 @@ Tip: Install the errors file like any other file in this markdown, and use them 
 ```momentum(mass, velocity, print_result=False)```
 
 ```python
-import scimatic.scientific.mechanics.momentum as momentum
+from scimatic.scientific.mechanics import momentum
 
 momentum(25, 60, print_result=True)
 
@@ -232,7 +287,7 @@ momentum(25, 60, print_result=True)
 ```impulse(force, initial_time, final_time, print_result=False, return_deltat=False)```
 
 ```python
-import scimatic.scientific.mechanics.impulse as impulse
+from scimatic.scientific.mechanics import impulse
 
 impulse(67, 10, 60, print_result=True, return_deltat=True)
 
@@ -246,7 +301,7 @@ impulse(67, 10, 60, print_result=True, return_deltat=True)
 ```AND(bool1, bool2, binary=False)```
 
 ```python
-import scimatic.c_engineering.logic_gates.AND as AND
+from scimatic.c_engineering.logic_gates import AND
 
 print(AND(True, True))
 print(AND(1, 1, binary=True))
@@ -259,16 +314,16 @@ print(AND(True, False, binary=True))
 print(AND(1, 0))
 
 # Output(True, True):
-#		True
-#		1
-#		1
-#		True
+#                True
+#                1
+#                1
+#                True
 
 # Output(True, False):
-#		False
-#		0
-#		0
-#		False
+#                False
+#                0
+#                0
+#                False
 ```
 
 ```NOT(value, binary=False)```
@@ -411,8 +466,6 @@ print(full_adder(1, 1, 1))
 
 • They can be used to create flickering, delayed, and pulsed binary signals.
 
-• Note: As of 1.40.0, the 3 functions below strictly need a list of booleans, I am working on a fix to this issue as soon as possible.
-
 ```flick(digits, binary=False, print_result=False)```
 ```python
 from scimatic import flick
@@ -440,8 +493,8 @@ from scimatic.c_engineering.signals import pulse
 import asyncio
 
 async def main():
-		async for p in pulse([True, False, True], 3, 0.5):
-				print(p)
+                async for p in pulse([True, False, True], 3, 0.5):
+                                print(p)
 asyncio.run(main())
 
 # Output: [False, True, False] -0.5s-> [True, False, True] -0.5-> [False, True, False]
@@ -482,15 +535,19 @@ from scimatic.utils.convenient_utils import CreateParsable
 test_subject = '123 Northwood Street' # Not my real address
 
 syntax = CreateParsable(test_subject)
+key = CreateParsable("name=Paul age=15 gender= mode='w' json=data.json")
 
 print(syntax.parse_letter()) # parses per letter
 print(syntax.parse_word()) # parses per word(word determined by whitespace, so 'NorthwoodStreet' outputs ['NorthwoodStreet']
 print(syntax.parse_token()) # parses per word and converts numbers into integers or floats
+print(key.parse_kwargs(save_json=True, print_result=True))
 
 # Output: ['1', '2', '3', 'N', 'o', 'r', 't', 'h', 'w', 'o', 'o', 'd', 'S', 't', 'r', 'e', 'e', 't']
 # Output: ['123', 'Northwood', 'Street']
 # Output: [123, 'Northwood', 'Street']
+# Output: {'name': 'Paul', 'age': 15, 'gender': None}
 ```
+- Note: If save_json is enabled, parse_kwargs tries to find a key named json and a key named mode(determines if the method of input is w, r+, or w+)(Optional because it just defaults to w) with a value .json and saves the parsed output into the json values .json file.
 
 ```Operator```
 - A type annotation for operators such as +, -, etc.
@@ -499,8 +556,8 @@ print(syntax.parse_token()) # parses per word and converts numbers into integers
 from scimatic.utils.convenient_utils import Operator
 
 def addition_op() -> Operator:
-		return '+'
-print(addition_op)
+                return '+'
+print(addition_op())
 
 # Output: +
 ```
@@ -514,7 +571,7 @@ calculate('1 + 1', print_result=True) # calculate uses CreateParsable's .parse_t
 
 # Output: 2
 ```
-- Basically a safer version of ```eval()```
+- A restricted arithmetic expression evaluator that uses SciMatic's parsing system instead of directly executing arbitrary Python code.
 
 ```factorial(n, print_result=False)```
 
@@ -532,11 +589,14 @@ factorial(3, print_result=True)
 ```python
 from scimatic.utils.convenient_utils import int64_limit
 
-print(int64_limit()) # if negative_value is True, -9,223,372,036,854,775,807
-print(int64_limit(unsigned=True) # if negative_value is True, 0
+print(int64_limit())
+print(int64_limit(unsigned=True))
+print(int64_limit(negative_value=True))
 
-# Output: 9,223,372,036,854,775,807
-# Output: 18,446,744,073,709,551,615
+# Output:
+# 9,223,372,036,854,775,807
+# 18,446,744,073,709,551,615
+# -9,223,372,036,854,775,807
 ```
 - Theres also an int32, int16, and int8 limit but their parameters are the same, only difference is the naming.
 
@@ -568,10 +628,10 @@ db = Database()
 
 @db.store
 def add(a, b):
-		return a + b
+                return a + b
 @db.store
 def mul(a, b):
-		return a * b
+                return a * b
 
 add(6, 7)
 mul(2, 2)
@@ -590,8 +650,8 @@ db = Database()
 db.get_one(print_result=True)
 db.get_one(1, print_result=True)
 
-# Output: ID: 2				Date stored: mm/dd/yyyy				Function: mul				Return Value: 4				Version: 1.4.0
-# Output: ID: 1				Date stored: mm/dd/yyyy				Function: add				Return Value: 13				Version: 1.4.0
+# Output: ID: 2                                Date stored: mm/dd/yyyy                                Function: mul                                Return Value: 4                                Version: 1.4.0
+# Output: ID: 1                                Date stored: mm/dd/yyyy                                Function: add                                Return Value: 13                                Version: 1.4.0
 ```
 - If the id parameter is None it gets the most recently added value
 
@@ -603,8 +663,8 @@ db = Database()
 
 db.get_all(print_result=True)
 
-# Output: ID: 1				Date stored: mm/dd/yyyy				Function: add 			Return Value: 13				Version: 1.4.0
-# 							 ID: 2				Date stored: mm/dd/yyyy				Function: mul				Return Value: 4				Version: 1.4.0
+# Output: ID: 1                                Date stored: mm/dd/yyyy                                Function: add                         Return Value: 13                                Version: 1.4.0
+#                                                          ID: 2                                Date stored: mm/dd/yyyy                                Function: mul                                Return Value: 4                                Version: 1.4.0
 ```
 
 ```db.delete(id=None, print_result=False)```
@@ -673,7 +733,7 @@ convert_bits(1, 'b', 'B', print_result=True)
 ```
 
 ### - weight.py
-```convert_weight(w, w_sym1, w_sym2, print_result=False```
+```convert_weight(w, w_sym1, w_sym2, print_result=False)```
 ```python
 from scimatic.utils.conversion.weight import convert_weight
 
@@ -683,8 +743,9 @@ convert_weight(1, 'kg', 'g', print_result=True)
 ```
 
 ### - currency.py
-- This one is the elephant in the room, it requires internet as it needs to use [frankfurter](https://frankfurter.dev/)(a website that documents 205 currencies rate of change).
-- Good thing I created an offline mode just for y'all(my non-existent users) which stores the rate of change in... you guessed it, sqlite3.
+- This one is the elephant in the room, it requires internet as it needs to use [frankfurter](https://frankfurter.dev/)
+- This function uses the Frankfurter API to retrieve exchange-rate data.
+- SciMatic also provides an offline mode that stores exchange-rate data locally using SQLite.
 
 ```fresh_convert_curr(money, curr1, curr2, id=None, save_offline=True, use_offline_db=False, reset_db=False, print_result=False)```
 ```python
@@ -692,5 +753,238 @@ from scimatic.utils.conversion.currency import fresh_convert_curr
 
 fresh_convert_curr(1, 'USD', 'PHP', print_result=True) # The result will store in the database
 
-# Output: 1USD -> around 62PHP as of 2026
+# Output: 1USD -> <current exchange rate>PHP
+```
+
+```cached_convert_curr(money, curr1, curr2, print_result=False)```
+```python
+from scimatic.utils.conversion.currency import cache_convert_curr
+
+for _ in range(3):
+		cache_convert_curr(1, 'USD', 'PHP', print_result=True)
+
+# Output: 1USD -> <current exchange rate>PHP
+# Bottom line: This function sacrifices the offline features fresh_convert_curr has for speed via caching the result.
+```
+
+```convert_binary(b, print_result=False)```
+```python
+from scimatic import rs_converters
+
+rs_converters.convert_binary([True, False], print_result=True)
+
+# Output: [1, 0]
+```
+
+## csv/
+
+### - CSV
+- This class takes a .csv file as an argument and when the .csv file does not exist it creates one in the os' Downloads directory.
+
+```serialize(matrix, write_to_file=False, print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.serialize(
+		[
+				[
+						'1',
+						'2',
+						'3'
+				], [
+						'x',
+						'y',
+						'z'
+				]
+		],
+		write_to_file=True,
+		print_result=True
+)
+
+# Output: 1,2,3\nx,y,z\n
+# Background Output: The serialized output is written on the file.
+```
+
+```deserialize(text, print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.deserialize('1,2,3\nx,y,z\n')
+
+# Output: [['1', '2', '3'], ['x', 'y', 'z']]
+```
+
+```read(print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.read(print_result=True)
+
+# Output: 
+#		1,2,3
+#		x,y,z
+```
+
+```write(text)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.write('4,5,6\na,b,c')
+
+# Background Output: Contents overwrite the current file
+```
+
+```rwrite(text, print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+# Current contents:
+# 4,5,6
+# a,b,c
+
+old = csv.rwrite('1,2,3\nx,y,z', print_result=True)
+
+# Output:
+# 4,5,6
+# a,b,c
+
+# The file now contains:
+# 1,2,3
+# x,y,z
+# Background Output: The table gets rewritten.
+# Bottom line: rwrite returns the old contents before rewriting meaning old will be the same as the output suggests.
+```
+- Note: This csv method first reads the old contents and then rewrites it.
+
+```wread(text, print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+new = csv.wread('4,5,6\na,b,c', print_result=True)
+
+# Output:
+#		4,5,6
+#		a,b,c
+# Background Output: The function wread first rewrites the old contents then returns the new contents.
+```
+
+```dup(name=None, ndups=1)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.dup(name='dupli.csv')
+csv.dup(ndups=4)
+
+# Output: dupli.csv will have the same contents as example.csv
+# Output: example[1].csv, example[2].csv, ...
+```
+- If `name` is provided, `ndups` is ignored and only the specified file is created.
+- If `name` is not provided, SciMatic uses bracketed numbering such as `example[1].csv`, `example[2].csv`, and so on.
+
+```add_row(new_row, mode='w', print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.add_row([['d', 'e', 'f']])
+
+# Output: Row will be added to example.csv
+# Bottom line: The add_row method needs a matrix.
+```
+
+```delete_row(row_num=None)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.delete_row()
+
+# Output: row index 0(4,5,6) will be deleted
+```
+
+```add_column(new_col, mode='w', print_result=False)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.add_column([['1', '2', '3']])
+
+# Output: Column 1 will be added at the last column.
+#																2
+#																3
+# Bottom line: The given matrix must be a Matrix Transpose:
+```
+
+- `add_column()` expects its input in column-oriented form.
+- Each child list represents one column.
+- The values inside that child list are the values belonging to that column.
+
+For example:
+
+```python
+[
+	['a', 'b', 'c'],
+	['1', '2', '3']
+]
+```
+represents two columns:
+
+```
+a  1
+b  2
+c  3
+```
+
+```delete_column(index=None)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.delete_column()
+
+# Output: The column we just added will get deleted because no arguments were given at index
+```
+```replace_cell(coordinates, value)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.replace_cell((0, 0), '0')
+
+# Output: The cell(0, 0) value(a) will be replaced with 0
+```
+
+```delete_cell(coordinates)```
+```python
+from scimatic.utils.csv import CSV
+
+csv = CSV('example.csv')
+
+csv.delete_cell((0, 0))
+
+# Output: The value at coordinate (0, 0) will get deleted.
+
+'''
+,b,c
+d,e,f
+'''
 ```
