@@ -105,6 +105,9 @@ def mean(
 	print_result: bool = False
 ) -> float:
 	
+	if not raw_data:
+		raise ValueError('Mean cannot accept empty lists.')
+	
 	output = sum(raw_data) / len(raw_data)
 	
 	if print_result:
@@ -130,4 +133,4 @@ def mode(
 	
 	if print_result:
 		print(output)
-	return output
+	return output
