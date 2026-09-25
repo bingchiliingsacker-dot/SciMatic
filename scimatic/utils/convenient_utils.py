@@ -439,7 +439,7 @@ def int32_limit(
 ) -> int:
 
         if unsigned:
-                output = 2**31 - 1 if not negative_value else 0
+                output = 2**32 - 1 if not negative_value else 0
 
         else:
                 output = 2**31 - 1 if not negative_value else -2**31
