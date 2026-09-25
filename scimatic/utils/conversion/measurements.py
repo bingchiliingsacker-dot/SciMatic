@@ -88,7 +88,7 @@ LENGTH_MEASURE = {
 
 AREA_MEASURE = {
 	**METRIC_AREA,
-	**IMPERIAL_MEASURE
+	**IMPERIAL_AREA
 }
 
 def convert_len(
