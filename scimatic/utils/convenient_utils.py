@@ -273,6 +273,13 @@ def calculate(
 	if len(expression) <= 2:
 		if print_result:
 			print(expression)
+		try:
+			int(expression)
+		except ValueError:
+			try:
+				float(expression)
+			except ValueError:
+				return expression
 		return expression
 
 	processor = []
@@ -319,7 +326,7 @@ def calculate(
 				try:
 					result = left_token / right_token
 				except ZeroDivisionError:
-					result = 0
+					raise ZeroDivisionError('Tip: Do not divide by 0')
 
 			elif operator == '*':
 				result = left_token * right_token
