@@ -95,7 +95,7 @@ from scimatic.mathematic.algebra import pythagorean_theorem
 pythagorean_theorem(1, 7, 3, print_result=True)
 pythagorean_theorem(1, 7, print_result=True)
 # Output: 3^2 = 1^2 + 7^2
-#                                                                        False
+#   False
 # Output: sqrt(1^2 + 7^2) = 5sqrt(2) or 7.071
 ```
 
@@ -138,7 +138,7 @@ from scimatic.mathematic.statistics import mean
 
 mean([1, 1, 2, 2, 3], print_result=True)
 
-# Output: 2.2
+# Output: 1.8
 ```
 
 ```mode(raw_data, k=1, print_result=False)```
@@ -164,6 +164,7 @@ sin_law('SSA', 8, 10, 30, print_result=True)
 
 # Output: Angle B = 20, Side b = 2.227, Side c = 1.185
 # Output: Angle A = 3, Side b = 29.274, Side c = 30.520
+# Ambiguous case returns a dictionary as it acknowledges the 3 ambiguous cases(no triangle, 1 triangle, 2 triangles)
 # Output: No valid triangle is formed...
 # Output: [{'angle B': 53.130, 'angle C': 96.870, 'side b': 9.928}]
 # Output: [{'angle B': 38.682, 'angle C': 111.318, 'side b': 14.905}, {'angle B': 141.318, 'angle C': 8.682, 'side b': 2.415}]
@@ -424,7 +425,7 @@ from scimatic.c_engineering.seg_7display import display_to_7seg
 
 print(display_to_7seg("8"))
 
-# Output: (1, 1, 1, 1, 1, 1, 1)
+# Output: (True, True, True, True, True, True, True)
 ```
 Note: The "8" character activates every segment of the display.
 
