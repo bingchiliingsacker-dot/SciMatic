@@ -5,7 +5,7 @@ requires = ['maturin>=1.0,<2.0']
 build-backend = 'maturin'
 
 [project]
-name = 'SciMatic-Mobile'
+name = 'SciMatic'
 version = '1.61.1'
 description = 'A Python library for mathematics, science calculations, compter engineering concepts, and experimental mathematical functions.'
 readme = 'README.md'
