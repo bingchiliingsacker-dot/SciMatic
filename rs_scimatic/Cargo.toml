@@ -1,0 +1,11 @@
+[package]
+name = "rs_scimatic"
+version = "1.4.10"
+edition = "2021"
+
+[lib]
+name = "rs_scimatic"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
