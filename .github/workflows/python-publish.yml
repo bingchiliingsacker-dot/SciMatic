@@ -29,7 +29,7 @@ jobs:
         run: python -m pip install maturin
 
       - name: Build release distributions
-        run: maturin build --release
+        run: maturin build --release --manifest-path rs_scimatic/Cargo.toml
 
       - name: Upload distributions
         uses: actions/upload-artifact@v4
