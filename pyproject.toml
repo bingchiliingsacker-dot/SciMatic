@@ -5,8 +5,8 @@ requires = ['maturin>=1.0,<2.0']
 build-backend = 'maturin'
 
 [project]
-name = 'SciMatic'
-version = '1.60.1'
+name = 'SciMatic-Mobile'
+version = '1.61.1'
 description = 'A Python library for mathematics, science calculations, compter engineering concepts, and experimental mathematical functions.'
 readme = 'README.md'
 requires-python = '>=3.9'
@@ -24,8 +24,9 @@ authors = [
 Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 
 [tool.maturin]
-python-source = '.'
-module-name = 'scimatic.flicker_module'
-bindings = 'pyo3'
-
+python-source = "."
+module-name = "scimatic.rs_scimatic"
+bindings = "pyo3"
+manifest-path = "scimatic/Cargo.toml"
+features = ["pyo3/extension-module"]
 #------------------------------------------Th3Curs3dOn3------------------------------------------#
