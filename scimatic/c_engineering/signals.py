@@ -1,5 +1,5 @@
 from typing import AsyncGenerator
-from ..rs_scimatic import flicker_module
+from ..rs_scimatic import flicker
 import time
 import asyncio
 
@@ -12,7 +12,7 @@ async def delay(
 
     start = time.perf_counter()
 
-    output = flicker_module.flick(vecbools, binary)
+    output = flicker.flick(vecbools, binary)
 
     end = time.perf_counter()
 
@@ -34,7 +34,7 @@ async def pulse(
     state = vecbools
 
     for i in range(iterations):
-        state = flicker_module.flick(state, False)
+        state = flicker.flick(state, False)
         output = [int(b) for b in state] if binary else state
         yield output
         if i < iterations - 1:
