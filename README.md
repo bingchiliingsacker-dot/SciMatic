@@ -202,12 +202,14 @@ SciMatic/
 |
 ├── RULES.md
 |
-├──LICENSE
+├── LICENSE
 |
-├── src/
-|   ├── lib.rs
-|   ├── flicker.rs
-|   └── conversion.rs
+├── rs_scimatic
+|   ├── Cargo.toml
+|   └── src/
+|       ├── lib.rs
+|       ├── flicker.rs
+|       └── conversion.rs
 |
 └── scimatic/
     |
@@ -245,6 +247,9 @@ SciMatic/
     |   └── statistics.py
     │
     └── scientific/
+        ├── biology.py
+        ├── earth_science.py
+        ├── thermodynamics.py
         └── mechanics.py
 ```
 
@@ -327,7 +332,7 @@ The project is intended to expand into areas such as:
 ## Science
 
 - [ ] Physics module
-- [ ] Thermodynamics
+- [x] Thermodynamics
 - [ ] Scientific constants
 - [ ] Engineering calculations
 - [ ] Advanced scientific simulations
