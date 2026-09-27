@@ -275,14 +275,34 @@ Tip: Install the errors file like any other file in this markdown, and use them 
 ## scientific/
 
 ### mechanics.py
-```momentum(mass, velocity, print_result=False)```
+```Mechanics```
+- This is a class that takes an argument mass and can be used for different formulas such as momentum and Kinetic Energy
 
 ```python
-from scimatic.scientific.mechanics import momentum
+from scimatic.scientific.mechanics import Mechanics
 
-momentum(25, 60, print_result=True)
+mechanics = Mechanics(mass=10) # In this case, 10kg is the mass
 
-# Output: Momentum: 1500 kg•m/s
+mechanics.momentum(velocity=100, print_result=True)
+KE = mechanics.kinetic_energy(velocity=100, print_result=True)
+mechanics.potential_energy(h=100, print_result=True)
+mechanics.force(acceleration=100, print_result=True)
+mechanics.mass_energy(print_result=True)
+mechanics.KE_velocity(KE=KE, print_result=True)
+mechanics.weight(gravity=100, print_result=True)
+mechanics.grav_force(obj_mass=100, r=50, print_result=True)
+
+"""
+Output:
+Momentum: 1000kg•m/s
+Kinetic Energy: 50000.0J
+Potential Energy: 9806.65J
+Force: 1000N
+Energy: 898755178736817640J
+Velocity: 100.0m/s
+Weight: 1000N
+Gravitational Force: 2.6697199999999995e-11N
+"""
 ```
 
 ```impulse(force, initial_time, final_time, print_result=False, return_deltat=False)```
@@ -294,6 +314,280 @@ impulse(67, 10, 60, print_result=True, return_deltat=True)
 
 # Output: Impulse: 3350N•s, Δt = 50s
 ```
+
+```work(force, displacement, angle=0.0, print_result=False)```
+```python
+from scimatic.scientific.mechanics import work
+
+work(force=100, displacement=100, angle=0.0, print_result=True)
+work(force=100, displacement=100, angle=90.0, print_result=True)
+"""
+Output:
+Work: 10000J
+Work: -4480.736161291701J
+"""
+```
+
+### - biology.py
+
+```PunnettSquare```
+- This class makes use of scimatic's CSV class and CSV to populate the CSV file in the rules of Mendelian Inheritance by [Gregor Mendel](https://en.wikipedia.org/wiki/Gregor_Mendel)
+
+```python
+from scimatic.utils.csv import CSV
+from scimatic.scientific.biology import PunnettSquare
+
+csv1 = CSV('PunnettSquareABO.csv')
+csv2 = CSV('PunnettSquare.csv')
+
+csv1.serialize(
+	[
+		['', 'I^A', 'i'],
+		['I^B', '', ''],
+		['i', '', ''],
+	],
+	write_to_file=True
+)
+
+csv2.serialize(
+	[
+		['', 'A', 'a'],
+		['A', '', ''],
+		['a', '', ''],
+	],
+	write_to_file=True
+)
+
+punnettblood = PunnettSquare('PunnettSquareABO.csv')
+punnett = PunnettSquare('PunnettSquare.csv')
+
+# Generate the offspring genotypes
+punnett.cross()
+punnettblood.cross()
+
+# Count each genotype
+punnett.genotype_ratio(
+	print_result=True
+)
+punnettblood.genotype_ratio(
+	print_result=True
+)
+
+# Count each phenotype
+# ABO type table is a special case
+punnettblood.phenotype_ratio(
+	dominant=None,
+	recessive=None,
+	bloodtype=True,
+	print_result=True
+)
+punnett.phenotype_ratio(
+	dominant={'A': 'Tall'},
+	recessive={'a': 'Short'},
+	print_result=True
+)
+
+# Calculate the probability of a specific genotype
+punnettblood.probability(
+	'I^Ai',
+	print_result=True
+)
+punnett.probability(
+	'Aa',
+	print_result=True
+)
+"""
+Output:
+
+{'AA': 1, 'Aa': 2, 'aa': 1}
+{'I^AI^B': 1, 'I^Bi': 1, 'I^Ai': 1, 'ii': 1}
+{'AB': 1, 'B': 1, 'A': 1, 'O': 1}
+{'Tall': 3, 'Short': 1}
+Probability of I^Ai: 25%
+Probability of Aa: 50%
+"""
+```
+
+```DNA```
+- This class on the other hand takes a DNA strand as an argument for complementing and converting to mRNA and proteins.
+
+```python
+from scimatic.scientific.biology import DNA
+
+dna = DNA('ATGC')
+
+dna.complement(reverse_comp=True, print_result=True)
+dna.complement(print_result=True)
+
+dna.DNA_to_mRNA(template=True, print_result=True)
+dna.DNA_to_mRNA(reverse_comp=True, print_result=True)
+dna.DNA_to_mRNA(template=True, reverse_comp=True, print_result=True)
+dna.DNA_to_mRNA(print_result=True)
+
+dna.DNA_to_protein(template=True, print_result=True)
+dna.DNA_to_protein(template=True, start_codon=True, print_result=True)
+dna.DNA_to_protein(start_codon=True, print_result=True)
+
+"""
+Output:
+
+{'CGTA'}
+{'TACG'}
+{'UACG'}
+{'GCAU'}
+{'CGUA'}
+{'AUGC'}
+{'Y'}
+set()
+{'M'}
+"""
+```
+- Note: Works for ambiguous cases too.
+
+### - earth_science.py
+- This one is less overwhelming than biology, it just has 2 stand-alone functions that are fairly easy to understand.
+
+```wind_chill(temperature, windspeed, temperature unit='f', print_result=False)```
+```python
+from scimatic.scientific.earth_science import wind_chill
+
+wind_chill(20, 40, temp='c', print_result=True)
+
+"""
+Output:
+
+−18.3c # That's cold af, recorded in antartica during summer!?!?!?!?
+"""
+```
+
+```dew_point(temperature, relative humidity, temp='c', print_result=False)```
+```python
+from scimatic.scientific.earth_science import dew_point
+
+dew_point(4000, 0.0666, temp='f', print_result=True)
+
+"""
+Output:
+
+520.84f # Hot af, recorded in Death valley, Arizona
+"""
+```
+
+### - thermodynamics.py
+```boyles_law(P1, V1, P2, V2, print_result=False)```
+```python
+from scimatic.scientific.thermodynamics import boyles_law
+
+boyles_law(100, 2, final_pressure=25, final_volume=4, print_result=True)
+"""
+Output:
+False
+"""
+
+boyles_law(100, 2, final_volume=4, print_result=True)
+"""
+Output:
+50.0
+50.0
+"""
+
+boyles_law(100, 2, final_pressure=50, print_result=True)
+"""
+Output:
+4.0
+4.0
+"""
+
+boyles_law(100, 2, final_pressure=50, final_volume=4, print_result=True)
+"""
+Output:
+P₁V₁ = P₂V₂ is True!
+True
+"""
+
+boyles_law(100, 2)
+"""
+Output:
+💥 SciMatic failed.
+
+☝ Reason: Boyles law requires a final pressure or a final volume given.
+💡 Tip: Give a final pressure or a final volume to the formula.
+
+ValueError:
+Neither a final pressure nor a final volume were given.
+"""
+```
+```ideal_gas_law(P, V, n, T, R, print_result=False)```
+```python
+from scimatic.scientific.thermodynamics import ideal_gas_law
+
+ideal_gas_law(P=101325, V=1, n=40.874, T=300, print_result=True)
+"""
+Output:
+PV = nTR is True!
+True
+"""
+
+ideal_gas_law(V=1, n=40.874, T=300, print_result=True)
+"""
+Output:
+101324.782...
+101324.782...
+"""
+
+ideal_gas_law(P=101325, n=40.874, T=300, print_result=True)
+"""
+Output:
+0.999997...
+0.999997...
+"""
+
+ideal_gas_law(P=101325, V=1, T=300, print_result=True)
+"""
+Output:
+40.874...
+40.874...
+"""
+
+ideal_gas_law(P=101325, V=1, n=40.874, print_result=True)
+"""
+Output:
+299.999...
+299.999...
+"""
+
+ideal_gas_law(P=101325, V=1, n=40.874, T=300, R=None, print_result=True)
+"""
+Output:
+8.314...
+8.314...
+"""
+
+ideal_gas_law(P=101325, V=1)
+"""
+Output:
+💥 SciMatic failed.
+
+☝ Reason: Ideal Gas law requires all values except 1 having an integer or float, you got multiple unknown values.
+💡 Tip: Give only 1 unknown value.
+
+ValueError:
+Multiple unknown values were given.
+"""
+
+ideal_gas_law()
+"""
+Output:
+💥 SciMatic failed.
+
+☝ Reason: Ideal Gas law requires all values except 1 having an integer or float, you got multiple unknown values.
+💡 Tip: Give only 1 unknown value.
+
+ValueError:
+Multiple unknown values were given.
+"""
+```
+
 
 ## c_engineering/
 
