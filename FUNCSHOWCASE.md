@@ -857,7 +857,7 @@ print(addition_op())
 # Output: +
 ```
 
-```calculate(text, print_result=False)```
+```calculate(text, verbose=False, print_result=False)```
 
 ```python
 from scimatic.utils.convenient_utils import calculate
@@ -867,6 +867,7 @@ calculate('1 + 1', print_result=True) # calculate uses CreateParsable's .parse_t
 # Output: 2
 ```
 - A restricted arithmetic expression evaluator that uses SciMatic's parsing system instead of directly executing arbitrary Python code.
+- Note: Verbose mode will include the steps the equation took to get to the output.
 
 ```factorial(n, print_result=False)```
 
