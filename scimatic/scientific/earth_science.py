@@ -17,6 +17,7 @@ def wind_chill(
         print('💡 Tip: The supported temperatures are as follow:')
         print('Celsius(c) Fahrenheit(f) Kelvin(k)')
         print('Rankine(r) Reamur(re)')
+        raise ValueError('SI unit for temperature not found. Refer to the text above for more infirmation.')
     output = convert_temp(formula, 'f', temp)
 
     if print_result:
@@ -30,6 +31,12 @@ def dew_point(
     temp: str = 'c',
     print_result: bool = False
 ) -> float:
+    if rh <= 0:
+        print('💥 SciMatic failed.')
+        print('')
+        print('☝️ Reason: Relative Humidity(rh) cannot be 0 or below.')
+        print('💡 Tip: You must give a non-zero argument to parameter rh.')
+        raise ValueError('Relative Humidity cannot be 0. Refer to the text above for more information.')
     y = log(rh / 100) + (17.62 * t) / (243.12 + t)
 
     td = (243.12 * y) / (17.62 - y)
@@ -41,6 +48,7 @@ def dew_point(
         print('💡 Tip: The supported temperatures are as follow:')
         print('Celsius(c) Fahrenheit(f) Kelvin(k)')
         print('Rankine(r) Reamur(re)')
+        raise ValueError('SI unit for temperature not found. Refer to the text above for more infirmation.')
     output = convert_temp(td, 'c', temp)
 
     if print_result:
