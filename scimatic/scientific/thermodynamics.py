@@ -82,11 +82,3 @@ def ideal_gas_law(
         if print_result:
             print(f'{R}J/(mol*K)')
         return R
-
-boyles_law(
-    initial_pressure=100,
-    initial_volume=100,
-    final_pressure=100,
-    final_volume=100,
-    print_result=True
-)
