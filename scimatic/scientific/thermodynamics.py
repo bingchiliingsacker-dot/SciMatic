@@ -41,8 +41,8 @@ def ideal_gas_law(
     nones = [P, V, T, R, n]
 
     iterations = 0
-    for n in nones:
-        if n is None:
+    for no in nones:
+        if no is None:
             iterations += 1
             continue
 
