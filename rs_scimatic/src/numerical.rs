@@ -1,6 +1,7 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
+#[pyo3(signature = (x, a, b, print_result=false))]
 pub fn clamp(
     py: Python<'_>,
     x: f64,
@@ -20,6 +21,7 @@ pub fn clamp(
 }
 
 #[pyfunction]
+#[pyo3(signature = (a, b, t, print_result=false))]
 pub fn lerp(
     py: Python<'_>,
     a: f64,
