@@ -10,6 +10,7 @@ fn gcd_calc(mut a: i64, mut b: i64) -> i64 {
     a.abs()
 }
 #[pyfunction]
+#[pyo3(signature = (a, b, print_result=false))]
 pub fn gcd(
     py: Python<'_>,
     a: i64,
@@ -27,6 +28,7 @@ pub fn gcd(
 }
 
 #[pyfunction]
+#[pyo3(signature = (a, b, print_result=false))]
 pub fn lcm(
     py: Python<'_>,
     a: i64,
