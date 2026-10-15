@@ -13,6 +13,6 @@ mathematics, science calculations,
 and experimental functions.
 '''
 
-__version__ = '1.80.0'
+__version__ = '1.81.0'
 __author__ = 'Th3Curs3dOn3'
 __license__ = 'MIT'
