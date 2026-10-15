@@ -1,6 +1,6 @@
 [package]
 name = "rs_scimatic"
-version = "1.80.0"
+version = "1.81.0"
 edition = "2021"
 
 [lib]
