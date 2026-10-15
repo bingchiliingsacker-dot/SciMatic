@@ -81,7 +81,7 @@ class CreateParsable:
 
         return output
 
-    def parse_token(self, print_result=False) -> list:
+    def parse_token(self, print_result=False, split_on='') -> list:
         	output = []
         	word = ''
 	        s = self.syntax
@@ -105,7 +105,7 @@ class CreateParsable:
 	        while i < len(s):
 	            ch = s[i]
 	
-	            if ch == ' ':
+	            if ch == split_on:
 	                flush()
 	                i += 1
 	                continue
