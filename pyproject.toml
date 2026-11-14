@@ -28,5 +28,4 @@ python-source = "."
 module-name = "scimatic.rs_scimatic"
 bindings = "pyo3"
 manifest-path = "scimatic/Cargo.toml"
-features = ["pyo3/extension-module"]
 #------------------------------------------Th3Curs3dOn3------------------------------------------#
