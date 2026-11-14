@@ -27,5 +27,5 @@ Repository = 'https://github.com/bingchiliingsacker-dot/SciMatic'
 python-source = "."
 module-name = "scimatic.rs_scimatic"
 bindings = "pyo3"
-manifest-path = "scimatic/Cargo.toml"
+manifest-path = "rs_scimatic/Cargo.toml"
 #------------------------------------------Th3Curs3dOn3------------------------------------------#
