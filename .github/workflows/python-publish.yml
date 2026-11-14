@@ -43,6 +43,7 @@ jobs:
 
     env:
       ANDROID_API_LEVEL: 24
+      CIBW_BUILD_VERBOSITY: 1
 
     steps:
       - uses: actions/checkout@v4
