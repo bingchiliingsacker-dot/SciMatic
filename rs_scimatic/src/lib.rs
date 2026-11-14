@@ -34,7 +34,7 @@ fn rs_scimatic(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
         wrap_pyfunction!(numerical::lerp, &numerical_module)?
     )?;
 
-    numerical_module.add_submodule(&numerical_module)?;
+    m.add_submodule(&numerical_module)?;
 
     let number_theory_module = PyModule::new(py, "number_theory")?;
 
@@ -46,7 +46,7 @@ fn rs_scimatic(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
         wrap_pyfunction!(number_theory::lcm, &number_theory_module)?
     )?;
 
-    number_theory_module.add_submodule(&number_theory_module)?;
+    m.add_submodule(&number_theory_module)?;
 
     let vector_module = PyModule::new(py, "vector")?;
 
